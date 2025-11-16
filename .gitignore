@@ -17,4 +17,4 @@
 .env
 
 # Linux scripts
-.sh
+killPort.sh
