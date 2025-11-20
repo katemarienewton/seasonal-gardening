@@ -49,9 +49,9 @@ function MonthRegionForm() {
           </select>
         </div>
         <Spacer />
-        <div className="flex  ">
+        <div className="flex justify-center md:justify-start ">
           <button
-            className="w-2/3 rounded-full bg-[#e3ead4] px-12 py-4   "
+            className="w-2/3 rounded-full bg-[#e3ead4] px-12 py-4 font-semibold text-[#2f2f2f]   "
             type="submit"
           >
             Go!
