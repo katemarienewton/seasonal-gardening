@@ -145,41 +145,36 @@ export async function seed(knex) {
       notes: 'Common cultivar: Tyee',
     },
     {
-      id: 24,
+      id: 25,
       vege_id: '8',
       name: 'Giant Winter',
       notes: 'Common cultivar: Giant Winter',
     },
     {
-      id: 25,
+      id: 26,
       vege_id: '9',
       name: 'Bright Lights',
       notes: 'Common cultivar: Bright Lights',
     },
     {
-      id: 26,
+      id: 27,
       vege_id: '9',
       name: 'Fordhook Giant',
       notes: 'Common cultivar: Fordhook Giant',
     },
     {
-      id: 27,
+      id: 28,
       vege_id: '9',
       name: 'Perpetual Spinach',
       notes: 'Common cultivar: Perpetual Spinach',
     },
     {
-      id: 28,
+      id: 29,
       vege_id: '10',
       name: 'Winterbor',
       notes: 'Common cultivar: Winterbor',
     },
-    {
-      id: 29,
-      vege_id: '10',
-      name: 'Red Russian',
-      notes: 'Common cultivar: Red Russian',
-    },
+
     {
       id: 30,
       vege_id: '10',
@@ -365,6 +360,12 @@ export async function seed(knex) {
       vege_id: '20',
       name: 'Tokyo Cross',
       notes: 'Common cultivar: Tokyo Cross',
+    },
+    {
+      id: 61,
+      vege_id: '10',
+      name: 'Red Russian',
+      notes: 'Common cultivar: Red Russian',
     },
   ])
 }
