@@ -1,5 +1,5 @@
 import { useFruits } from '../hooks/useFruits.ts'
-import MonthRegionForm from '../components/MonthRegionForm.tsx'
+import MonthRegionForm from './MonthRegionForm.tsx'
 import { useState } from 'react'
 
 function App() {

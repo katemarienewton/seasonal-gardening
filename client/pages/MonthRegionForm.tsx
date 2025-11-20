@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useGetAllRegions } from '../hooks/useRegions'
-import Spacer from './theme/Spacer'
-import ThemedH1 from './theme/ThemedHeader'
-import ThemedText from './theme/ThemedText'
+import Spacer from '../components/theme/Spacer'
+import ThemedH1 from '../components/theme/ThemedHeader'
+import ThemedText from '../components/theme/ThemedText'
 import { useOutletContext } from 'react-router'
 
 const months = [
