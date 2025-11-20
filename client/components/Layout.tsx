@@ -1,13 +1,25 @@
+import { useState } from 'react'
 import { Outlet } from 'react-router'
 
 export default function Layout() {
+  // filter states look at docs about context
+  const [selRegionId, setSelRegionId] = useState<string>('')
+  const [selMonth, setSelMonth] = useState<string>('')
+
   return (
     <>
       <header>
         <h1>Fullstack Boilerplate - with Fruits!</h1>
       </header>
       <main>
-        <Outlet />
+        <Outlet
+          context={{
+            selRegionId,
+            setSelRegionId,
+            selMonth,
+            setSelMonth,
+          }}
+        />
       </main>
       <footer></footer>
     </>

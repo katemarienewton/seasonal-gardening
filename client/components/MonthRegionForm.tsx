@@ -1,8 +1,45 @@
+import React, { useState } from 'react'
+import { useGetAllRegions } from '../hooks/useRegions'
 import Spacer from './theme/Spacer'
 import ThemedH1 from './theme/ThemedHeader'
 import ThemedText from './theme/ThemedText'
+import { useOutletContext } from 'react-router'
+
+const months = [
+  { January: 'Jan' },
+  { February: 'Feb' },
+  { March: 'Mar' },
+  { April: 'April' },
+  { May: 'May' },
+  { June: 'Jun' },
+  { July: 'Jul' },
+  { August: 'Aug' },
+  { September: 'Sept' },
+  { October: 'Oct' },
+  { November: 'Nov' },
+  { December: 'Dec' },
+]
+
+interface AppContext {
+  selRegionId: string
+  setSelRegionId: React.Dispatch<React.SetStateAction<string>>
+  selMonth: string
+  setSelMonth: React.Dispatch<React.SetStateAction<string>>
+}
 
 function MonthRegionForm() {
+  const regionQuery = useGetAllRegions()
+  // grabbing stuff from *global context defined in layout
+  const { selRegionId, setSelRegionId, selMonth, setSelMonth } =
+    useOutletContext<AppContext>()
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLSelectElement>,
+    setter: React.Dispatch<React.SetStateAction<string>>,
+  ) => {
+    setter(e.target.value)
+    // console.log(selMonth)
+  }
   return (
     <div className="m-3 flex w-3/4 flex-1 flex-col flex-wrap  p-5">
       <div>
@@ -19,45 +56,65 @@ function MonthRegionForm() {
             <ThemedH1>Region.</ThemedH1>
           </label>
           <select
+            value={selRegionId}
+            onChange={(e) => {
+              handleChange(e, setSelRegionId)
+            }}
             className="appearance-none rounded-[40px] bg-[#e5e4e3] px-10 py-4 text-center text-[clamp(14px,3vw,20px)] font-medium text-[#2f2f2f] md:px-16 "
             name="region"
             id="region"
           >
             <option value="">Select Region</option>
-            <option value="chch"> Christchurch</option>
-            <option value="ackl"> Auckland</option>
-            <option value="nels"> Nelson</option>
-            <option value="dun"> Dunedin</option>
+            {regionQuery.data?.map((region) => {
+              return (
+                <option value={region.id} key={region.id}>
+                  {region.name}
+                </option>
+              )
+            })}
           </select>
         </div>
         <Spacer className="h-10" />
         <div className="flex gap-20 md:gap-32">
           <label htmlFor="month">
-            {' '}
             <ThemedH1>Month.</ThemedH1>
           </label>
           <select
+            value={selMonth}
+            onChange={(e) => {
+              handleChange(e, setSelMonth)
+            }}
             className="appearance-none rounded-[40px] bg-[#e5e4e3] px-10 py-4 text-center text-[clamp(14px,3vw,20px)] font-medium text-[#2f2f2f] md:px-16 "
             name="month"
             id="month"
           >
             <option value="">Select Month</option>
-            <option value="jan"> January</option>
-            <option value="fed"> February</option>
-            <option value="mar"> March</option>
-            <option value="apr"> April</option>
+            {months.map((month) => {
+              const [key, value] = Object.entries(month)[0]
+              return (
+                <option key={value} value={value}>
+                  {key}
+                </option>
+              )
+            })}
           </select>
         </div>
         <Spacer />
         <div className="flex justify-center md:justify-start ">
           <button
-            className="w-2/3 rounded-full bg-[#e3ead4] px-12 py-4 font-semibold text-[#2f2f2f]   "
+            disabled={!regionQuery.isSuccess}
+            className="w-2/3 cursor-pointer rounded-full bg-[#e3ead4] px-12 py-4 font-semibold text-[#2f2f2f] hover:bg-[#aaaf9f]   "
             type="submit"
           >
             Go!
           </button>
         </div>
       </form>
+      {regionQuery.isError ? (
+        <p> an error occurred when loading regions. Please refresh</p>
+      ) : (
+        <p></p>
+      )}
     </div>
   )
 }
