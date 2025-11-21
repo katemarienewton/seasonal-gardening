@@ -1,4 +1,4 @@
-import { createRoutesFromElements, Route } from 'react-router-dom'
+import { createRoutesFromElements, Route } from 'react-router'
 import App from './pages/App.tsx'
 import Home from './pages/Home.tsx'
 import Layout from './components/Layout.tsx'
