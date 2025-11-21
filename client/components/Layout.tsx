@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router'
+import Navbar from './Navbar'
 
 export default function Layout() {
   // filter states look at docs about context
@@ -8,9 +9,7 @@ export default function Layout() {
 
   return (
     <div className="h-screen bg-[#F5F2ED]">
-      <header>
-        <h1>Fullstack Boilerplate - with Fruits!</h1>
-      </header>
+      <Navbar />
       <main>
         <Outlet
           context={{
