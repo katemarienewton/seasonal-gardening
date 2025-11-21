@@ -7,7 +7,7 @@ export default function Layout() {
   const [selMonth, setSelMonth] = useState<string>('')
 
   return (
-    <>
+    <div className="h-screen bg-[#F5F2ED]">
       <header>
         <h1>Fullstack Boilerplate - with Fruits!</h1>
       </header>
@@ -22,6 +22,6 @@ export default function Layout() {
         />
       </main>
       <footer></footer>
-    </>
+    </div>
   )
 }

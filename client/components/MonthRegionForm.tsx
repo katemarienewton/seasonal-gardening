@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
 import { useGetAllRegions } from '../hooks/useRegions'
-import Spacer from '../components/theme/Spacer'
-import ThemedH1 from '../components/theme/ThemedHeader'
-import ThemedText from '../components/theme/ThemedText'
+import Spacer from './theme/Spacer'
+import ThemedH1 from './theme/ThemedHeader'
+import ThemedText from './theme/ThemedText'
 import { useOutletContext } from 'react-router'
 
 const months = [
@@ -27,11 +26,13 @@ interface AppContext {
   setSelMonth: React.Dispatch<React.SetStateAction<string>>
 }
 
-function MonthRegionForm() {
+function MonthRegionForm({
+  selRegionId,
+  setSelRegionId,
+  selMonth,
+  setSelMonth,
+}: AppContext) {
   const regionQuery = useGetAllRegions()
-  // grabbing stuff from *global context defined in layout
-  const { selRegionId, setSelRegionId, selMonth, setSelMonth } =
-    useOutletContext<AppContext>()
 
   const handleChange = (
     e: React.ChangeEvent<HTMLSelectElement>,
@@ -41,7 +42,7 @@ function MonthRegionForm() {
     // console.log(selMonth)
   }
   return (
-    <div className="m-3 flex w-3/4 flex-1 flex-col flex-wrap  p-5">
+    <div className="flex-2 m-3 flex flex-col flex-wrap  p-5">
       <div>
         <ThemedH1>Choose your month and region to grow.</ThemedH1>
         <ThemedText>
@@ -103,7 +104,7 @@ function MonthRegionForm() {
         <div className="flex justify-center md:justify-start ">
           <button
             disabled={!regionQuery.isSuccess}
-            className="w-2/3 cursor-pointer rounded-full bg-[#e3ead4] px-12 py-4 font-semibold text-[#2f2f2f] hover:bg-[#aaaf9f]   "
+            className="w-1/2 cursor-pointer rounded-full bg-[#e3ead4] px-12 py-4 font-semibold text-[#2f2f2f] hover:bg-[#aaaf9f]   "
             type="submit"
           >
             Go!

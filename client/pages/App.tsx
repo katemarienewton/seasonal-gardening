@@ -1,5 +1,4 @@
 import { useFruits } from '../hooks/useFruits.ts'
-import MonthRegionForm from './MonthRegionForm.tsx'
 import { useState } from 'react'
 
 function App() {
@@ -10,7 +9,6 @@ function App() {
           Fullstack Boilerplate - with Fruits!
         </h1>
       </div>
-      <MonthRegionForm />
     </>
   )
 }
