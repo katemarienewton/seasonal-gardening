@@ -1,8 +1,9 @@
+import { useEffect, useState } from 'react'
 import { useGetAllRegions } from '../hooks/useRegions'
 import Spacer from './theme/Spacer'
 import ThemedH1 from './theme/ThemedHeader'
 import ThemedText from './theme/ThemedText'
-import { useOutletContext } from 'react-router'
+import { useNavigate } from 'react-router'
 
 const months = [
   { January: 'Jan' },
@@ -33,13 +34,27 @@ function MonthRegionForm({
   setSelMonth,
 }: AppContext) {
   const regionQuery = useGetAllRegions()
+  const [btnDisabled, setBtnDisabled] = useState(true)
+
+  const navigate = useNavigate()
 
   const handleChange = (
     e: React.ChangeEvent<HTMLSelectElement>,
     setter: React.Dispatch<React.SetStateAction<string>>,
   ) => {
     setter(e.target.value)
-    // console.log(selMonth)
+  }
+
+  useEffect(() => {
+    if (selRegionId != '' && selMonth != '') {
+      setBtnDisabled(false)
+      console.log('button enabled')
+    }
+  }, [selRegionId, selMonth])
+
+  const handleSubmit = () => {
+    console.log('submitted')
+    navigate('/app')
   }
   return (
     <div className="flex-2 m-3 flex flex-col flex-wrap  p-5">
@@ -51,7 +66,7 @@ function MonthRegionForm({
         </ThemedText>
       </div>
       <Spacer />
-      <form>
+      <form onSubmit={() => handleSubmit()}>
         <div className="flex  gap-20 md:gap-32">
           <label htmlFor="region">
             <ThemedH1>Region.</ThemedH1>
@@ -103,9 +118,9 @@ function MonthRegionForm({
         <Spacer />
         <div className="flex justify-center md:justify-start ">
           <button
-            disabled={!regionQuery.isSuccess}
+            disabled={!regionQuery.isSuccess || btnDisabled}
             className="w-1/2 cursor-pointer rounded-full bg-[#e3ead4] px-12 py-4 font-semibold text-[#2f2f2f] hover:bg-[#aaaf9f]   "
-            type="submit"
+            // type="submit"
           >
             Go!
           </button>
