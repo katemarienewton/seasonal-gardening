@@ -6,7 +6,7 @@ export async function up(knex) {
   return knex.schema.createTable('season', (table) => {
     table.increments('id')
     table.integer('vege_id')
-    table.varchar('hardiness_zone')
+    table.integer('region_id')
     table.text('planting_month')
     table.text('harvest_month')
   })
