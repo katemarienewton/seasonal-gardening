@@ -20,7 +20,7 @@ const plants: Vegetables[] = [
     yield_per_plant_min: 1,
     yield_per_plant_max: 3,
     storage: 'Cool (10–15°C), dark, 2–4 months',
-    image: '/potato.webp', // put these in /public
+    image: '/potato.webp',
   },
   {
     id: 2,
@@ -64,40 +64,37 @@ export default function GetAllPlants() {
   return (
     <>
       <Navbar />
-      {/* Spacer if your header/nav stack over content */}
       <Spacer />
 
       <main className="mx-auto max-w-6xl px-4 py-8 md:px-8">
-        <ThemedH1 className="mb-8 text-center">Garden Vegetables</ThemedH1>
+        <ThemedH1 className="mb-4 text-left">
+          You&apos;ve selected Taranaki in November.
+        </ThemedH1>
 
-        {/* 3-column grid on large screens, 2 on medium, 1 on mobile */}
+        <ThemedText className="mb-8 text-left">
+          This month you can plant:
+        </ThemedText>
+
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
           {plants.map((veg) => (
             <article
               key={veg.id}
-              className="flex flex-col items-center rounded-2xl bg-[#f5f2ed] p-5 text-center shadow-md"
+              className="flex h-full flex-col rounded-2xl bg-[#f5f2ed] p-5 shadow-md"
             >
               <img
                 src={veg.image}
                 alt={veg.name}
-                className="mb-4 h-40 w-40 rounded-xl object-cover"
+                className="mb-4 h-64 w-full rounded-xl object-cover"
               />
+              <div className="flex flex-1 flex-col gap-2">
+                <ThemedH1 className="text-left">{veg.name}</ThemedH1>
 
-              <ThemedH1 className="mb-1 text-[clamp(18px,3vw,22px)]">
-                {veg.name}
-              </ThemedH1>
+                <ThemedText className="text-left">{veg.description}</ThemedText>
+              </div>
 
-              <ThemedText className="mb-2 text-[clamp(12px,2.5vw,16px)] italic">
-                {veg.scientific_name}
-              </ThemedText>
-
-              <ThemedText className="mb-2 text-[clamp(12px,2.5vw,16px)]">
-                {veg.description}
-              </ThemedText>
-
-              <ThemedText className="text-[clamp(11px,2.3vw,14px)]">
-                {veg.storage}
-              </ThemedText>
+              <button className="mt-4 self-start text-sm font-semibold text-[#2f2f2f] hover:underline">
+                Click to learn more →
+              </button>
             </article>
           ))}
         </div>
