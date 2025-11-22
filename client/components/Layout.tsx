@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Outlet } from 'react-router'
 import Navbar from './Navbar'
+import Header from './Header'
 
 export default function Layout() {
   // filter states look at docs about context
@@ -9,6 +10,7 @@ export default function Layout() {
 
   return (
     <div className="h-screen bg-[#F5F2ED]">
+      <Header />
       <Navbar />
       <main>
         <Outlet
