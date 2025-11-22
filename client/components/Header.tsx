@@ -1,4 +1,5 @@
 //import Navbar from './Navbar'
+import Navbar from './Navbar'
 import ThemedH1 from './theme/ThemedHeader'
 
 export default function Header() {
@@ -9,6 +10,7 @@ export default function Header() {
         <ThemedH1 className="text-[#2f2f2f]">GroWise</ThemedH1>
 
         {/* NAVBAR RIGHT */}
+        <Navbar />
       </div>
     </header>
   )
