@@ -2,10 +2,10 @@ export function useTestAuth() {
   return {
     isAuthenticated: true,
     user: {
-      id: 'jackfruit123',
-      name: 'We Want Fruits',
-      email: 'wheredafruits@test.com',
+      name: "Dev User",
+      email: "dev@example.com",
     },
-  }
-  ;() => Promise.resolve()
+    loginWithRedirect: () => console.log("You are in fake vegetable"),
+    logout: () => console.log("Test successfully logged out")
+  };
 }

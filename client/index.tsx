@@ -4,7 +4,8 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { RouterProvider } from 'react-router'
 import { createBrowserRouter } from 'react-router'
 import routes from './routes.tsx'
-import { Auth0Provider } from '@auth0/auth0-react'
+// import { Auth0Provider } from '@auth0/auth0-react' - temp while in dev mode
+import { useTestAuth as Auth0Provider } from './hooks/useTestAuth.ts' // use this in dev mode
 
 const router = createBrowserRouter(routes)
 const queryClient = new QueryClient()
