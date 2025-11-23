@@ -10,7 +10,9 @@ router.get('/:id', async (req, res) => {
     // console.log('Server returning:', plantDetail)
     res.json(plantDetail)
   } catch (error) {
-    console.error(error)
+    console.error(
+      error instanceof Error ? error.message : 'Error getting plant details',
+    )
     res.status(500).send('Could not get plant detail')
   }
 })

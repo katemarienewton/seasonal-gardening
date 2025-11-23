@@ -1,8 +1,17 @@
-import { describe, it, expect, beforeAll, beforeEach, afterAll } from 'vitest'
+import {
+  describe,
+  it,
+  expect,
+  beforeAll,
+  beforeEach,
+  afterAll,
+  vi,
+} from 'vitest'
 import request from 'supertest'
 
 import db from '../db/connection.ts'
 import server from '../server.ts'
+import * as dbFuncs from '../db/plantDetail.ts'
 
 beforeAll(async () => {
   await db.migrate.latest()
@@ -20,6 +29,7 @@ describe('getting plant details from a specific id', () => {
   it('gets potatoes with id 1', async () => {
     const res = await request(server).get('/api/v1/vegetables/1')
     const vege = res.body
+    expect(res.status).toBe(200)
     expect(vege.name).toStrictEqual('Potatoes')
     expect(vege).toStrictEqual({
       daysToHarvestMax: 120,
@@ -46,5 +56,17 @@ describe('getting plant details from a specific id', () => {
       yieldPerPlantMax: 3,
       yieldPerPlantMin: 1,
     })
+  })
+
+  it('returns a 500 error when region db call fails', async () => {
+    vi.spyOn(dbFuncs, 'getPlantDetail').mockRejectedValue(
+      new Error('DB Failed'),
+    )
+
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
+    const response = await request(server).get('/api/v1/vegetables/1')
+
+    expect(response.status).toBe(500)
+    expect(errorSpy.mock.calls[0][0]).toBe('DB Failed')
   })
 })
