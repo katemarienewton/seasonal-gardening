@@ -29,7 +29,7 @@ interface AppContext {
 
 function MonthRegionForm({
   selRegionId,
-  setSelRegionId,bootcamp/december/SeasonalGardening/client/components/theme
+  setSelRegionId,
   selMonth,
   setSelMonth,
 }: AppContext) {
