@@ -64,3 +64,15 @@ describe('testing plant detail calls', () => {
     expect(vege).toStrictEqual(examplePotato)
   })
 })
+
+describe('the get all vegetable db function (unit test)', () => {
+  it('returns an array of all the regions', async () => {
+    const exampleRegion = { id: 1, name: 'Far North', zone: '9a', notes: '' }
+
+    const regions = await getAllRegions()
+
+    expect(regions[0]).toStrictEqual(exampleRegion)
+    expect(regions).toHaveLength(66)
+    expect(regions[0]).toStrictEqual(exampleRegion)
+  })
+})
