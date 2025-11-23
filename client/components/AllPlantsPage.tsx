@@ -2,7 +2,7 @@ import Navbar from '../components/Navbar'
 import ThemedH1 from '../components/theme/ThemedHeader'
 import ThemedText from '../components/theme/ThemedText'
 import Spacer from '../components/theme/Spacer'
-import { Vegetables } from '../../models/vegetables'
+import {Vegetables} from '../../models/vegetables'
 
 const plants: Vegetables[] = [
   {
