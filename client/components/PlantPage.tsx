@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import { useParams, useNavigate } from 'react-router'
 import { useState } from 'react'
-// import { Button } from '@/components/ui/button'
-// import { Card, CardContent } from '@/components/ui/card'
+import { Button } from '../../src/components/ui/button'
+import { Card, CardContent } from '../../src/components/ui/card'
 import { PlantData } from './../../models/plant'
 
 export default function PlantPage() {
@@ -36,33 +36,51 @@ export default function PlantPage() {
   }
 
   return (
-    <div>
-      <img
-        src={vegetable.image}
-        alt={vegetable.name}
-        className="w-50 mb-4 h-40 rounded-lg sm:h-48 md:h-56 lg:h-64"
-      />
-      <h1 className="mb-2 text-xl font-semibold">{vegetable.name}</h1>
-      {showDetail && (
-        <div className="mb-2">
-          <p>Scientific Name: {vegetable.scientificName}</p>
-          <p>{vegetable.description}</p>
-          <p>
-            Days to harvest: {vegetable.daysToHarvestMin}-
-            {vegetable.daysToHarvestMax}
-          </p>
-        </div>
-      )}
-      <button onClick={() => setShowDetail(!showDetail)}>
-        {showDetail ? 'Hide Details' : 'Show Details'}
-      </button>
+    <div className="mt-24 px-4 md:px-8">
+      <Card className="mx-auto max-w-5xl p-8 shadow-lg">
+        <CardContent className="flex flex-col items-start gap-8 md:flex-row">
+          {/* LEFT SIDE — TEXT */}
+          <div className="flex-1">
+            <h1 className="mb-2 text-3xl font-bold">{vegetable.name}</h1>
 
-      <button
-        onClick={() => navigate(`/plant/${id}/guide`)}
-        className='className="flex flex-wrap items-center gap-2 md:flex-row'
-      >
-        Show Full Guide
-      </button>
+            {showDetail && (
+              <div className="mb-6 space-y-3 text-[#2f2f2f]">
+                <p>
+                  <strong>Scientific Name:</strong> {vegetable.scientificName}
+                </p>
+                <p>{vegetable.description}</p>
+                <p>
+                  <strong>Days to harvest:</strong> {vegetable.daysToHarvestMin}
+                  –{vegetable.daysToHarvestMax}
+                </p>
+              </div>
+            )}
+
+            <div className="mt-6 flex flex-wrap gap-4">
+              <Button
+                className="rounded-full bg-[#e5e4e3] px-6 py-3 text-[#2f2f2f] shadow-md hover:shadow-lg"
+                onClick={() => setShowDetail(!showDetail)}
+              >
+                {showDetail ? 'Hide Details' : 'Show Details'}
+              </Button>
+
+              <Button
+                onClick={() => navigate(`/plant/${id}/guide`)}
+                className="rounded-full bg-[#e5e4e3] px-6 py-3 text-[#2f2f2f] shadow-md hover:shadow-lg"
+              >
+                Show Full Guide
+              </Button>
+            </div>
+          </div>
+
+          {/* RIGHT SIDE — IMAGE */}
+          <img
+            src={vegetable.image}
+            alt={vegetable.name}
+            className="h-auto w-full rounded-lg object-cover shadow-lg md:w-96 lg:w-[500px]"
+          />
+        </CardContent>
+      </Card>
     </div>
   )
 }
