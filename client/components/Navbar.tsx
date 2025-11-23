@@ -3,7 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { useTestAuth } from '../hooks/useTestAuth'
 
 export default function Navbar() {
-  const { isAuthenticated, loginWithRedirect } = useTestAuth()
+  const { isAuthenticated, loginWithRedirect, logout } = useTestAuth()
   const navigate = useNavigate()
 
   function handleMyGarden(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
@@ -46,20 +46,31 @@ export default function Navbar() {
           My Garden
         </NavLink>
 
-        <NavLink
-          to="/login"
-          onClick={(e) => {
-            e.preventDefault() // stop navigation to /login
-            loginWithRedirect() // fake or real login
-          }}
-          className={({ isActive }) =>
-            `text-sm font-semibold text-[#2f2f2f] ${
-              isActive ? 'underline' : ''
-            }`
-          }
-        >
-          Login
-        </NavLink>
+        {!isAuthenticated && (
+          <NavLink
+            to="/login"
+            onClick={(e) => {
+              e.preventDefault()
+              loginWithRedirect()
+            }}
+            className={({ isActive }) =>
+              `text-sm font-semibold text-[#2f2f2f] ${
+                isActive ? 'underline' : ''
+              }`
+            }
+          >
+            Login
+          </NavLink>
+        )}
+
+        {isAuthenticated && (
+          <button
+            onClick={handleLogout}
+            className="text-sm font-semibold text-[#2f2f2f] hover:underline"
+          >
+            Logout
+          </button>
+        )}
       </div>
     </nav>
   )
