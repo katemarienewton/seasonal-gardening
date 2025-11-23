@@ -3,6 +3,7 @@ import { beforeAll, beforeEach, expect, describe, it, afterAll } from 'vitest'
 import db from './connection.ts'
 import { getAllRegions } from './region.ts'
 import { getPlantDetail } from './plantDetail.ts'
+import { PlantData } from '../../models/plant.ts'
 
 beforeAll(async () => {
   console.log('before all')
@@ -58,6 +59,8 @@ describe('testing plant detail calls', () => {
       stakingNotes: '',
     }
     const vege = await getPlantDetail(1)
+
     expect(vege.id).toStrictEqual(examplePotato.id)
+    expect(vege).toStrictEqual(examplePotato)
   })
 })
