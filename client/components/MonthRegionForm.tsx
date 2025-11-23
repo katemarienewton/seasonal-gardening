@@ -54,7 +54,7 @@ function MonthRegionForm({
 
   const handleSubmit = () => {
     console.log('submitted')
-    navigate('/app')
+    navigate('/plants')
   }
   return (
     <div className="flex-2 m-3 flex flex-col flex-wrap  p-5">

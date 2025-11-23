@@ -9,7 +9,7 @@ export default function Layout() {
   const [selMonth, setSelMonth] = useState<string>('')
 
   return (
-    <div className="h-screen bg-[#F5F2ED]">
+    <div className="h-full bg-[#F5F2ED]">
       <Header />
       <Navbar />
       <main>
