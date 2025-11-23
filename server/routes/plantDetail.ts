@@ -7,7 +7,7 @@ router.get('/:id', async (req, res) => {
   try {
     const id = Number(req.params.id)
     const plantDetail = await db.getPlantDetail(id)
-    console.log('Server returning:', plantDetail)
+    // console.log('Server returning:', plantDetail)
     res.json(plantDetail)
   } catch (error) {
     console.error(error)
