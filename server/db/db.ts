@@ -1,14 +1,22 @@
+// db/db.ts
 import db from './connection'
+import { PlantData } from '../../models/plant'
 
-export async function getAllPlants() {
-  const fruits = db('fruit')
-    .join('vegetables', 'vegetables.name', 'vegetable.image')
-    .select('fruit.name', 'fruit.image')
-
-  const vegetables = db('vegetables')
-    .join('fruit', 'fruit.name', 'fruit.image')
-    .select('vegetables.name', 'vegetables.image')
-
-  const result = await fruits.union(vegetables)
-  return result
+export async function getAllPlants(): Promise<PlantData[]> {
+  return db('vegetables').select(
+    'id',
+    'name',
+    'description',
+    'soil_id',
+    'spacing_id',
+    'requirements_id',
+    'feeding_id',
+    'staking_id',
+    'days_to_harvest_min',
+    'days_to_harvest_max',
+    'yield_per_plant_min',
+    'yield_per_plant_max',
+    'storage',
+    'image',
+  )
 }

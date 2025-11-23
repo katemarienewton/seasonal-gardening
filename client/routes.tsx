@@ -4,6 +4,8 @@ import Home from './pages/Home.tsx'
 import Layout from './components/Layout.tsx'
 import AllPlantsPage from './components/AllPlantsPage.tsx'
 import MyGarden from './pages/MyGarden.tsx'
+import PlantPage from './components/PlantPage.tsx'
+import PlantGuide from './components/PlantGuide.tsx'
 
 export default createRoutesFromElements(
   <Route path="/" element={<Layout />}>
