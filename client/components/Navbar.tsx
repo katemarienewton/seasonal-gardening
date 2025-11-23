@@ -1,6 +1,25 @@
-import { NavLink } from 'react-router'
+import { NavLink, useNavigate } from 'react-router'
+import { useAuth0 } from '@auth0/auth0-react'
+import { useTestAuth } from '../hooks/useTestAuth'
 
 export default function Navbar() {
+  const { isAuthenticated, loginWithRedirect } = useTestAuth()
+  const navigate = useNavigate()
+
+  function handleMyGarden(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+    if (!isAuthenticated) {
+      e.preventDefault() // stop NavLink navigation due to condtitional logic for the testauth. could delete later, but wnated to keep navLink structure.
+      loginWithRedirect()
+    } else {
+      navigate('/my-garden')
+    }
+  }
+
+  function handleLogout() {
+    logout()
+    navigate('/')
+  }
+
   return (
     <nav className="absolute right-4 top-4">
       <div className="flex gap-4 rounded-full bg-[#e5e4e3] px-6 py-3 shadow-md">
@@ -17,6 +36,7 @@ export default function Navbar() {
 
         <NavLink
           to="/my-garden"
+          onClick={handleMyGarden}
           className={({ isActive }) =>
             `text-sm font-semibold text-[#2f2f2f] ${
               isActive ? 'underline' : ''
@@ -28,6 +48,10 @@ export default function Navbar() {
 
         <NavLink
           to="/login"
+          onClick={(e) => {
+            e.preventDefault() // stop navigation to /login
+            loginWithRedirect() // fake or real login
+          }}
           className={({ isActive }) =>
             `text-sm font-semibold text-[#2f2f2f] ${
               isActive ? 'underline' : ''
@@ -36,9 +60,6 @@ export default function Navbar() {
         >
           Login
         </NavLink>
-
-        {/* Replace later when Auth is wired */}
-        {/* <button onClick={logout}>Logout</button> */}
       </div>
     </nav>
   )
