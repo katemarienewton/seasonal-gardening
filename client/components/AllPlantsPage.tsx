@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import ThemedH1 from '../components/theme/ThemedHeader'
 import ThemedText from '../components/theme/ThemedText'
@@ -35,7 +36,6 @@ export default function GetAllPlants() {
     <>
       <Navbar />
       <Spacer />
-
       <main className="mx-auto max-w-6xl px-4 py-8 md:px-8">
         <ThemedH1 className="mb-4 text-left">
           You&apos;ve selected Taranaki in November.
@@ -62,9 +62,12 @@ export default function GetAllPlants() {
                 <ThemedText className="text-left">{veg.description}</ThemedText>
               </div>
 
-              <button className="mt-4 self-start text-sm font-semibold text-[#2f2f2f] hover:underline">
+              <Link
+                to={`/plant/${veg.id}/guide`}
+                className="mt-4 self-start text-sm font-semibold text-[#2f2f2f] hover:text-[#B8C2A1]"
+              >
                 Click to learn more →
-              </button>
+              </Link>
             </article>
           ))}
         </div>
