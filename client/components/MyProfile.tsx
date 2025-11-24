@@ -1,4 +1,4 @@
-import {useTestAuth} from '../hooks/useTestAuth'
+import { useTestAuth } from '../hooks/useTestAuth'
 // import {useAuth0} from .. add when ready and delete above
 import ThemedH1 from '../components/theme/ThemedHeader'
 import ThemedText from '../components/theme/ThemedText'
@@ -6,7 +6,7 @@ import Spacer from '../components/theme/Spacer'
 import { useNavigate } from 'react-router'
 
 export default function MyProfile() {
-  const {user, logout} = useTestAuth() // swap usetestauth with useAuth0 when ready
+  const { user, logout } = useTestAuth() // swap usetestauth with useAuth0 when ready
   const navigate = useNavigate()
 
   return (
@@ -48,6 +48,12 @@ export default function MyProfile() {
             onClick={() => navigate('/profile/edit')}
           >
             Edit Profile
+          </button>
+          <button
+            className="w-full rounded-full bg-[#e3ead4] px-6 py-3 font-semibold text-[#2f2f2f] transition hover:bg-[#b9c3a8]"
+            onClick={() => navigate('/my-garden')}
+          >
+            Go Back
           </button>
 
           <button
