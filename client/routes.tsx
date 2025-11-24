@@ -6,6 +6,7 @@ import AllPlantsPage from './components/AllPlantsPage.tsx'
 import MyGarden from './pages/MyGarden.tsx'
 import PlantPage from './components/PlantPage.tsx'
 import PlantGuide from './components/PlantGuide.tsx'
+import MyProfile from './components/MyProfile'
 
 export default createRoutesFromElements(
   <Route path="/" element={<Layout />}>
@@ -15,5 +16,6 @@ export default createRoutesFromElements(
     <Route path="plant/:id/guide" element={<PlantGuide />} />
     <Route path="plants" element={<AllPlantsPage />} />
     <Route path="my-garden" element={<MyGarden />} />
+    <Route path="profile" element={<MyProfile />} />
   </Route>,
 )

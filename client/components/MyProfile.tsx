@@ -1,10 +1,11 @@
 import {useTestAuth} from '../hooks/useTestAuth'
+// import {useAuth0} from .. add when ready and delete above
 import ThemedH1 from '../components/theme/ThemedHeader'
 import ThemedText from '../components/theme/ThemedText'
 import Spacer from '../components/theme/Spacer'
 
 export default function MyProfile() {
-  const {user, logout} = useTestAuth()
+  const {user, logout} = useTestAuth() // swap usetestauth with useAuth0 when ready
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-12">
