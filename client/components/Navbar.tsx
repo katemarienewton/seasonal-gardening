@@ -21,12 +21,12 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="absolute right-4 top-4">
-      <div className="flex gap-4 rounded-full bg-[#e5e4e3] px-6 py-3 shadow-md">
+    <nav>
+      <div className="flex flex-wrap gap-4 rounded-full bg-secondary px-4 py-2">
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `text-sm font-semibold text-[#2f2f2f] ${
+            `text-sm font-semibold text-foreground ${
               isActive ? 'underline' : ''
             }`
           }
@@ -38,7 +38,7 @@ export default function Navbar() {
           to="/my-garden"
           onClick={handleMyGarden}
           className={({ isActive }) =>
-            `text-sm font-semibold text-[#2f2f2f] ${
+            `text-sm font-semibold text-foreground ${
               isActive ? 'underline' : ''
             }`
           }
@@ -55,7 +55,7 @@ export default function Navbar() {
               loginWithRedirect()
             }}
             className={({ isActive }) =>
-              `text-sm font-semibold text-[#2f2f2f] ${
+              `text-sm font-semibold text-foreground ${
                 isActive ? 'underline' : ''
               }`
             }
@@ -67,7 +67,7 @@ export default function Navbar() {
         {isAuthenticated && (
           <button
             onClick={handleLogout}
-            className="text-sm font-semibold text-[#2f2f2f] hover:underline"
+            className="text-sm font-semibold text-foreground hover:underline"
           >
             Logout
           </button>

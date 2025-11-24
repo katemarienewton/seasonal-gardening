@@ -3,11 +3,11 @@ import * as db from '../db/db'
 
 const router = express.Router()
 
-// GET localhost:3000/api/v1/allplants/
+// GET localhost:3000/api/v1/plants/
 router.get('/', async (req, res) => {
   try {
-    const regions = await db.getAllPlants()
-    res.json(regions)
+    const plants = await db.getAllPlants()
+    res.json({ plants })
   } catch (error) {
     console.error(
       error instanceof Error ? error.message : 'Error getting all plants',

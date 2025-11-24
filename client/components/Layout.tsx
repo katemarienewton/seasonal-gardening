@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Outlet } from 'react-router'
-import Navbar from './Navbar'
 import Header from './Header'
 
 export default function Layout() {
@@ -9,10 +8,9 @@ export default function Layout() {
   const [selMonth, setSelMonth] = useState<string>('')
 
   return (
-    <div className="h-full bg-[#F5F2ED]">
+    <div className="flex min-h-screen flex-col bg-[#F5F2ED] text-foreground">
       <Header />
-      <Navbar />
-      <main>
+      <main className="container mx-auto flex-1 px-4 py-8">
         <Outlet
           context={{
             selRegionId,
