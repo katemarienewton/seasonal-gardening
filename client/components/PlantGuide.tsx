@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router'
 import { PlantData } from './../../models/plant'
-import { Card, CardContent } from '../../src/components/ui/card'
+import { Card, CardContent } from './card'
 
 export default function PlantGuide() {
   const { id } = useParams()
