@@ -1,12 +1,24 @@
 import { Link } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import ThemedH1 from '../components/theme/ThemedHeader'
 import ThemedText from '../components/theme/ThemedText'
 import Spacer from '../components/theme/Spacer'
 import { usePlants } from '../hooks/usePlants'
 
+interface PlantsLocationState {
+  regionName?: string
+  month?: string
+}
+
 export default function GetAllPlants() {
   const { data: plants, isLoading, isError } = usePlants()
+  const location = useLocation()
+  const state = (location.state || {}) as PlantsLocationState
+
+  // Fallbacks in case someone hits /plants directly
+  const regionName = state.regionName || 'Taranaki'
+  const month = state.month || 'November'
 
   if (isLoading) {
     return (
@@ -38,7 +50,7 @@ export default function GetAllPlants() {
       <Spacer />
       <main className="mx-auto max-w-6xl px-4 py-8 md:px-8">
         <ThemedH1 className="mb-4 text-left">
-          You&apos;ve selected Taranaki in November.
+          You&apos;ve selected {regionName} in {month}.
         </ThemedH1>
 
         <ThemedText className="mb-8 text-left">
