@@ -9,7 +9,7 @@ import Spacer from '../components/theme/Spacer'
 
 export default function EditProfile() {
   const navigate = useNavigate()
-  const { user } = useTestAuth()     // later: useAuth0()
+  const { user } = useTestAuth() // later: useAuth0()
 
   const userId = 1 // placeholder: replace with user.id linked to DB later once the auth0 is set up
 
@@ -41,7 +41,6 @@ export default function EditProfile() {
       <Spacer className="h-6" />
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-
         {/* EMAIL */}
         <div>
           <ThemedText className="mb-1 text-left">Email</ThemedText>
