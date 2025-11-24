@@ -1,5 +1,4 @@
 import { NavLink, useNavigate } from 'react-router'
-// import { useAuth0 } from '@auth0/auth0-react'
 import { useTestAuth } from '../hooks/useTestAuth'
 
 export default function Navbar() {
@@ -8,7 +7,7 @@ export default function Navbar() {
 
   function handleMyGarden(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     if (!isAuthenticated) {
-      e.preventDefault() // stop NavLink navigation due to condtitional logic for the testauth. could delete later, but wnated to keep navLink structure.
+      e.preventDefault()
       loginWithRedirect()
     } else {
       navigate('/my-garden')
@@ -22,56 +21,57 @@ export default function Navbar() {
 
   return (
     <nav>
-      <div className="flex flex-wrap gap-4 rounded-full bg-secondary px-4 py-2">
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            `text-sm font-semibold text-foreground ${
-              isActive ? 'underline' : ''
-            }`
-          }
-        >
-          Home
-        </NavLink>
-
-        <NavLink
-          to="/my-garden"
-          onClick={handleMyGarden}
-          className={({ isActive }) =>
-            `text-sm font-semibold text-foreground ${
-              isActive ? 'underline' : ''
-            }`
-          }
-        >
-          My Garden
-        </NavLink>
-        {/* <NavLink to="/profile">My Profile</NavLink> HAVE IT HERE, BUT ITS NOT ON THE FIGMA BOARD - fi we want it on the navbar we can uncomment it.  */}
-
-        {!isAuthenticated && (
+      <div className="mx-auto max-w-5xl px-4">
+        <div className="flex gap-4 rounded-full bg-[#e8e6e1] py-2">
           <NavLink
-            to="/login"
-            onClick={(e) => {
-              e.preventDefault()
-              loginWithRedirect()
-            }}
+            to="/"
             className={({ isActive }) =>
-              `text-sm font-semibold text-foreground ${
-                isActive ? 'underline' : ''
+              `rounded-[40px] px-6 py-3 text-center text-[clamp(14px,3vw,20px)] font-semibold transition-colors duration-300 ${
+                isActive ? 'text-[#6a8a62]' : 'text-[#2f2f2f]'
               }`
             }
           >
-            Login
+            Home
           </NavLink>
-        )}
 
-        {isAuthenticated && (
-          <button
-            onClick={handleLogout}
-            className="text-sm font-semibold text-foreground hover:underline"
+          <NavLink
+            to="/my-garden"
+            onClick={handleMyGarden}
+            className={({ isActive }) =>
+              `rounded-[40px] px-6 py-3 text-center text-[clamp(14px,3vw,20px)] font-semibold transition-colors duration-300 ${
+                isActive ? 'text-[#6a8a62]' : 'text-[#2f2f2f]'
+              }`
+            }
           >
-            Logout
-          </button>
-        )}
+            My Garden
+          </NavLink>
+
+          {!isAuthenticated && (
+            <NavLink
+              to="/login"
+              onClick={(e) => {
+                e.preventDefault()
+                loginWithRedirect()
+              }}
+              className={({ isActive }) =>
+                `rounded-[40px] px-6 py-3 text-center text-[clamp(14px,3vw,20px)] font-semibold transition-colors duration-300 ${
+                  isActive ? 'text-[#6a8a62]' : 'text-[#2f2f2f]'
+                }`
+              }
+            >
+              Login
+            </NavLink>
+          )}
+
+          {isAuthenticated && (
+            <button
+              onClick={handleLogout}
+              className="rounded-[40px] px-6 py-3 text-center text-[clamp(14px,3vw,20px)] font-semibold transition-colors duration-300"
+            >
+              Logout
+            </button>
+          )}
+        </div>
       </div>
     </nav>
   )

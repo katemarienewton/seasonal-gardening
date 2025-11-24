@@ -80,7 +80,7 @@ export default function MonthRegionForm({
           <select
             value={selRegionId}
             onChange={(e) => handleChange(e, setSelRegionId)}
-            className="w-60 appearance-none rounded-[40px] bg-[#e5e4e3] px-12 py-4 text-center text-[clamp(14px,3vw,20px)] font-semibold text-[#2f2f2f]"
+            className="w-60 appearance-none rounded-[40px] bg-[#e8e6e1] px-12 py-4 text-center text-[clamp(14px,3vw,20px)] font-semibold text-[#2f2f2f]"
           >
             <option value="">Select Region</option>
             {regionQuery.data?.map((region) => (
@@ -104,7 +104,7 @@ export default function MonthRegionForm({
           <select
             value={selMonth}
             onChange={(e) => handleChange(e, setSelMonth)}
-            className="w-60 appearance-none rounded-[40px] bg-[#e5e4e3] px-12 py-4 text-center text-[clamp(14px,3vw,20px)] font-semibold text-[#2f2f2f]"
+            className="w-60 appearance-none rounded-[40px] bg-[#e8e6e1] px-12 py-4 text-center text-[clamp(14px,3vw,20px)] font-semibold text-[#2f2f2f]"
           >
             <option value="">Select Month</option>
             {months.map((month) => {
@@ -121,7 +121,7 @@ export default function MonthRegionForm({
         {/* go button */}
         <button
           disabled={!regionQuery.isSuccess || btnDisabled}
-          className="w-full appearance-none rounded-[40px] bg-[#B8C2A1] px-12 py-4 text-center text-[clamp(14px,3vw,20px)] font-semibold text-[#2f2f2f]"
+          className="w-full appearance-none rounded-[40px] bg-[#d7d9c5] px-12 py-4 text-center text-[clamp(14px,3vw,20px)] font-semibold text-[#2f2f2f]"
           onClick={handleSubmit}
         >
           Go!
