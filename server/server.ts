@@ -3,7 +3,8 @@ import * as Path from 'node:path'
 
 import fruitRoutes from './routes/fruits.ts'
 import regionRoutes from './routes/region.ts'
-import allPlants from './routes/allplants.ts'
+import plantDetailRoutes from './routes/plantDetail.ts'
+import userRoutes from './routes/users'
 
 const server = express()
 
@@ -11,7 +12,8 @@ server.use(express.json())
 
 server.use('/api/v1/fruits', fruitRoutes)
 server.use('/api/v1/regions', regionRoutes)
-server.use('/api/v1/plants', allPlants)
+server.use('/api/v1/vegetables', plantDetailRoutes)
+server.use('/api/v1/users', userRoutes)
 
 if (process.env.NODE_ENV === 'production') {
   server.use(express.static(Path.resolve('public')))

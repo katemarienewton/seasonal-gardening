@@ -45,6 +45,7 @@ export default function Navbar() {
         >
           My Garden
         </NavLink>
+        {/* <NavLink to="/profile">My Profile</NavLink> HAVE IT HERE, BUT ITS NOT ON THE FIGMA BOARD - fi we want it on the navbar we can uncomment it.  */}
 
         {!isAuthenticated && (
           <NavLink

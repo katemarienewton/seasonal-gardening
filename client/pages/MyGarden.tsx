@@ -1,4 +1,9 @@
+import {useNavigate} from 'react-router'
+
 export default function MyGarden() {
+  
+  const navigate = useNavigate()
+  
   return (
     <div className="p-10">
       <h1 className="mb-6 text-3xl font-bold">My Garden</h1>
@@ -20,8 +25,8 @@ export default function MyGarden() {
         </button>
 
         <button
-          className="w-full rounded-full bg-accent px-8 py-4 text-lg font-semibold text-accent-foreground transition hover:bg-muted"
-          onClick={() => console.log('My Account has been clicked')}
+          className="w-full rounded-full bg-[#e5e4e3] px-8 py-4 text-lg font-semibold text-[#2f2f2f] hover:bg-[#cfcfcf] transition"
+          onClick={() => navigate('/profile')}
         >
           My Account
         </button>
