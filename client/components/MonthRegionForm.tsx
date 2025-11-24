@@ -1,20 +1,17 @@
 import { useEffect, useState } from 'react'
 import { useGetAllRegions } from '../hooks/useRegions'
-import Spacer from './theme/Spacer'
-import ThemedH1 from './theme/ThemedHeader'
-import ThemedText from './theme/ThemedText'
 import { useNavigate } from 'react-router'
 
 const months = [
   { January: 'Jan' },
   { February: 'Feb' },
   { March: 'Mar' },
-  { April: 'April' },
+  { April: 'Apr' },
   { May: 'May' },
   { June: 'Jun' },
   { July: 'Jul' },
   { August: 'Aug' },
-  { September: 'Sept' },
+  { September: 'Sep' },
   { October: 'Oct' },
   { November: 'Nov' },
   { December: 'Dec' },
@@ -27,7 +24,7 @@ interface AppContext {
   setSelMonth: React.Dispatch<React.SetStateAction<string>>
 }
 
-function MonthRegionForm({
+export default function MonthRegionForm({
   selRegionId,
   setSelRegionId,
   selMonth,
@@ -35,7 +32,6 @@ function MonthRegionForm({
 }: AppContext) {
   const regionQuery = useGetAllRegions()
   const [btnDisabled, setBtnDisabled] = useState(true)
-
   const navigate = useNavigate()
 
   const handleChange = (
@@ -46,9 +42,8 @@ function MonthRegionForm({
   }
 
   useEffect(() => {
-    if (selRegionId != '' && selMonth != '') {
+    if (selRegionId && selMonth) {
       setBtnDisabled(false)
-      console.log('button enabled')
     }
   }, [selRegionId, selMonth])
 
@@ -56,53 +51,60 @@ function MonthRegionForm({
     console.log('submitted')
     navigate('/plants')
   }
+
   return (
-    <div className="flex-2 m-3 flex flex-col flex-wrap  p-5">
-      <div>
-        <ThemedH1>Choose your month and region to grow.</ThemedH1>
-        <ThemedText>
+    <div className="container mx-auto px-4 py-8">
+      {/* top container */}
+      <div className="mb-8">
+        <h2 className="mb-4 text-3xl font-semibold">
+          Choose your month and region to grow.
+        </h2>
+        <p className="text-lg text-muted-foreground">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
           vestibulum
-        </ThemedText>
+        </p>
       </div>
-      <Spacer />
-      <form onSubmit={() => handleSubmit()}>
-        <div className="flex  gap-20 md:gap-32">
-          <label htmlFor="region">
-            <ThemedH1>Region.</ThemedH1>
+
+      {/* bottom container */}
+      <div className="flex max-w-md flex-col gap-6">
+        {/* region */}
+        <div className="flex w-full items-center justify-between gap-4">
+          {/* label */}
+          <label
+            htmlFor="region"
+            className="w-24 text-right text-3xl font-semibold"
+          >
+            Region.
           </label>
+          {/* select */}
           <select
             value={selRegionId}
-            onChange={(e) => {
-              handleChange(e, setSelRegionId)
-            }}
-            className="appearance-none rounded-[40px] bg-[#e5e4e3] px-10 py-4 text-center text-[clamp(14px,3vw,20px)] font-medium text-[#2f2f2f] md:px-16 "
-            name="region"
-            id="region"
+            onChange={(e) => handleChange(e, setSelRegionId)}
+            className="w-60 appearance-none rounded-[40px] bg-[#e5e4e3] px-12 py-4 text-center text-[clamp(14px,3vw,20px)] font-semibold text-[#2f2f2f]"
           >
             <option value="">Select Region</option>
-            {regionQuery.data?.map((region) => {
-              return (
-                <option value={region.id} key={region.id}>
-                  {region.name}
-                </option>
-              )
-            })}
+            {regionQuery.data?.map((region) => (
+              <option key={region.id} value={region.id}>
+                {region.name}
+              </option>
+            ))}
           </select>
         </div>
-        <Spacer className="h-10" />
-        <div className="flex gap-20 md:gap-32">
-          <label htmlFor="month">
-            <ThemedH1>Month.</ThemedH1>
+
+        {/* month */}
+        <div className="flex w-full items-center justify-between gap-4">
+          {/* label */}
+          <label
+            htmlFor="month"
+            className="w-24 text-right text-3xl font-semibold"
+          >
+            Month.
           </label>
+          {/* select */}
           <select
             value={selMonth}
-            onChange={(e) => {
-              handleChange(e, setSelMonth)
-            }}
-            className="appearance-none rounded-[40px] bg-[#e5e4e3] px-10 py-4 text-center text-[clamp(14px,3vw,20px)] font-medium text-[#2f2f2f] md:px-16 "
-            name="month"
-            id="month"
+            onChange={(e) => handleChange(e, setSelMonth)}
+            className="w-60 appearance-none rounded-[40px] bg-[#e5e4e3] px-12 py-4 text-center text-[clamp(14px,3vw,20px)] font-semibold text-[#2f2f2f]"
           >
             <option value="">Select Month</option>
             {months.map((month) => {
@@ -115,24 +117,16 @@ function MonthRegionForm({
             })}
           </select>
         </div>
-        <Spacer />
-        <div className="flex justify-center md:justify-start ">
-          <button
-            disabled={!regionQuery.isSuccess || btnDisabled}
-            className="w-1/2 cursor-pointer rounded-full bg-[#e3ead4] px-12 py-4 font-semibold text-[#2f2f2f] hover:bg-[#aaaf9f]   "
-            // type="submit"
-          >
-            Go!
-          </button>
-        </div>
-      </form>
-      {regionQuery.isError ? (
-        <p> an error occurred when loading regions. Please refresh</p>
-      ) : (
-        <p></p>
-      )}
+
+        {/* go button */}
+        <button
+          disabled={!regionQuery.isSuccess || btnDisabled}
+          className="w-full appearance-none rounded-[40px] bg-[#B8C2A1] px-12 py-4 text-center text-[clamp(14px,3vw,20px)] font-semibold text-[#2f2f2f]"
+          onClick={handleSubmit}
+        >
+          Go!
+        </button>
+      </div>
     </div>
   )
 }
-
-export default MonthRegionForm
