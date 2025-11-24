@@ -3,9 +3,11 @@ import {useTestAuth} from '../hooks/useTestAuth'
 import ThemedH1 from '../components/theme/ThemedHeader'
 import ThemedText from '../components/theme/ThemedText'
 import Spacer from '../components/theme/Spacer'
+import { useNavigate } from 'react-router'
 
 export default function MyProfile() {
   const {user, logout} = useTestAuth() // swap usetestauth with useAuth0 when ready
+  const navigate = useNavigate()
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-12">
@@ -43,7 +45,7 @@ export default function MyProfile() {
         <div className="flex flex-col gap-4">
           <button
             className="w-full rounded-full bg-[#e3ead4] px-6 py-3 font-semibold text-[#2f2f2f] transition hover:bg-[#b9c3a8]"
-            onClick={() => console.log('Edit profile was clicked')}
+            onClick={() => navigate('/profile/edit')}
           >
             Edit Profile
           </button>

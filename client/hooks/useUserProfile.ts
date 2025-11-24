@@ -1,19 +1,31 @@
-import { useQuery, useMutation } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 
-export function useUserProfile(userId: string) {
+export function useUserProfile(id: number | string) {
   return useQuery({
-    queryKey: ['profile', userId],
-    queryFn: () => fetch(`/api/v1/profile/${userId}`).then(res => res.json())
+    queryKey: ['user', id],
+    queryFn: async () => {
+      const res = await fetch(`/api/v1/users/${id}`)
+      if (!res.ok) throw new Error('Failed to load user')
+      return res.json()
+    },
   })
 }
 
-export function useUpdateProfile(userId: string) {
+export function useUpdateUserProfile(id: number | string) {
+  const queryClient = useQueryClient()
+
   return useMutation({
-    mutationFn: (updates) =>
-      fetch(`/api/v1/profile/${userId}`, {
+    mutationFn: async (updates: any) => {
+      const res = await fetch(`/api/v1/users/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updates)
-      }),
+        body: JSON.stringify(updates),
+      })
+      if (!res.ok) throw new Error('Failed to update user')
+      return res.json()
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['user', id] })
+    },
   })
 }

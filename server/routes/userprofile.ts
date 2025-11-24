@@ -9,3 +9,6 @@ router.patch('/:id', async (req, res) => {
 
   res.json({ status: 'ok' })
 })
+
+
+// this is if we want to use combination of auth0 and server db - might be too complicated, but will see how much time we have left at the ened..

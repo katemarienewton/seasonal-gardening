@@ -7,7 +7,7 @@ export async function up(knex) {
     table.increments('id')
     table.string('auth0_id')
     table.string('email')
-    table.number('region_id')
+    table.integer('region_id')
   
     
   })
