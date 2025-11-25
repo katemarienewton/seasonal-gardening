@@ -15,11 +15,7 @@ export default function MyGarden() {
       <div className="flex max-w-sm flex-col gap-6">
         <button
           className="w-full rounded-full bg-secondary px-8 py-4 text-lg font-semibold text-foreground transition hover:bg-muted"
-          onClick={() =>
-            console.log(
-              "clickety clack - you pressed a button, but manage my garden isn't ready yet",
-            )
-          }
+          onClick={() => navigate('/manage-my-garden')}
         >
           Manage My Garden
         </button>
