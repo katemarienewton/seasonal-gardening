@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from 'react-router'
 import { useTestAuth } from '../hooks/useTestAuth'
 
 const navItemClass =
-  'rounded-[40px] px-6 py-3 text-center text-[clamp(14px,3vw,20px)] font-semibold transition-colors duration-300'
+  'text-base rounded-[40px] px-6 py-3 text-center text-[clamp(14px,3vw,20px)] font-semibold transition-colors duration-300'
 
 export default function Navbar() {
   const { isAuthenticated, loginWithRedirect, logout } = useTestAuth()
@@ -24,7 +24,7 @@ export default function Navbar() {
 
   return (
     <nav>
-      <div className="flex gap-4 rounded-full bg-[#e8e6e1] px-2 py-2">
+      <div className="flex gap-1 rounded-full bg-[#e8e6e1] px-2 py-0.5">
         <NavLink
           to="/"
           className={({ isActive }) =>

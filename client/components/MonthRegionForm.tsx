@@ -51,7 +51,7 @@ export default function MonthRegionForm({
   return (
     <div className="flex w-full flex-col gap-6">
       <div className="w-full max-w-2xl">
-        <h2 className="mb-4 text-3xl font-semibold md:text-4xl lg:text-5xl">
+        <h2 className="mb-4 text-2xl font-semibold md:text-3xl lg:text-4xl">
           Choose your month and region to grow.
         </h2>
         <p className="text-lg text-[#8c8c8c]">

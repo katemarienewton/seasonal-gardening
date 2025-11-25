@@ -19,6 +19,7 @@ export default function InputSelect({
       py-3
       text-center
       text-[clamp(14px,3vw,20px)]
+      text-base
       font-semibold
       leading-[1.5]
       text-[#2f2f2f]

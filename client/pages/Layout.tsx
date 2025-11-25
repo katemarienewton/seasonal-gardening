@@ -8,15 +8,23 @@ export default function Layout() {
 
   return (
     <div className="relative min-h-screen bg-[#f5f1ed]">
-      <div className="pointer-events-none absolute inset-0 bg-[url('/assets/nz-02.png')] bg-contain bg-right bg-no-repeat opacity-20"></div>
+      {/* header */}
+      <Header />
 
-      <div className="relative z-10 flex min-h-screen flex-col">
-        <Header />
-        <main className="flex-1">
-          <Outlet
-            context={{ selRegionId, setSelRegionId, selMonth, setSelMonth }}
-          />
-        </main>
+      {/* main content */}
+      <main className="relative z-10 px-8 py-8">
+        <Outlet
+          context={{ selRegionId, setSelRegionId, selMonth, setSelMonth }}
+        />
+      </main>
+
+      {/* png */}
+      <div className="pointer-events-none fixed bottom-0 right-0 z-0 h-64 w-auto">
+        <img
+          src="/assets/nz-02.png"
+          alt="NZ Map"
+          className="h-full w-auto object-contain opacity-20"
+        />
       </div>
     </div>
   )
