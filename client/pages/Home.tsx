@@ -13,19 +13,21 @@ export default function Home() {
     useOutletContext<AppContext>()
 
   return (
-    <div className="flex flex-col items-start gap-8 lg:flex-row">
-      <MonthRegionForm
-        selMonth={selMonth}
-        selRegionId={selRegionId}
-        setSelMonth={setSelMonth}
-        setSelRegionId={setSelRegionId}
-      />
-
-      <div className="flex flex-1 justify-center lg:justify-end">
+    <div className="relative flex w-full flex-col lg:flex-row">
+      <div className="z-10">
+        <MonthRegionForm
+          selMonth={selMonth}
+          selRegionId={selRegionId}
+          setSelMonth={setSelMonth}
+          setSelRegionId={setSelRegionId}
+        />
+      </div>
+      {/* png */}
+      <div className="pointer-events-none fixed bottom-0 right-0 z-0">
         <img
           src="/assets/nz-02.png"
-          alt="map of nz"
-          className="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg"
+          alt="NZ Map"
+          className="h-auto max-h-[80vh] w-auto object-contain opacity-100 lg:max-h-[90vh]"
         />
       </div>
     </div>

@@ -1,34 +1,34 @@
 import { NavLink, useNavigate } from 'react-router'
-// import { useAuth0 } from '@auth0/auth0-react'
 import { useTestAuth } from '../hooks/useTestAuth'
+
+const navItemClass =
+  'text-base rounded-[40px] px-6 py-3 text-center text-[clamp(14px,3vw,20px)] font-semibold transition-colors duration-300'
 
 export default function Navbar() {
   const { isAuthenticated, loginWithRedirect, logout } = useTestAuth()
   const navigate = useNavigate()
 
-  function handleMyGarden(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+  const handleMyGarden = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (!isAuthenticated) {
-      e.preventDefault() // stop NavLink navigation due to condtitional logic for the testauth. could delete later, but wnated to keep navLink structure.
+      e.preventDefault()
       loginWithRedirect()
     } else {
       navigate('/my-garden')
     }
   }
 
-  function handleLogout() {
+  const handleLogout = () => {
     logout()
     navigate('/')
   }
 
   return (
     <nav>
-      <div className="flex flex-wrap gap-4 rounded-full bg-secondary px-4 py-2">
+      <div className="flex gap-1 rounded-full bg-[#e8e6e1] px-2 py-0.5">
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `text-sm font-semibold text-foreground ${
-              isActive ? 'underline' : ''
-            }`
+            `${navItemClass} ${isActive ? 'text-[#6a8a62]' : 'text-[#2f2f2f]'}`
           }
         >
           Home
@@ -38,16 +38,13 @@ export default function Navbar() {
           to="/my-garden"
           onClick={handleMyGarden}
           className={({ isActive }) =>
-            `text-sm font-semibold text-foreground ${
-              isActive ? 'underline' : ''
-            }`
+            `${navItemClass} ${isActive ? 'text-[#6a8a62]' : 'text-[#2f2f2f]'}`
           }
         >
           My Garden
         </NavLink>
-        {/* <NavLink to="/profile">My Profile</NavLink> HAVE IT HERE, BUT ITS NOT ON THE FIGMA BOARD - fi we want it on the navbar we can uncomment it.  */}
 
-        {!isAuthenticated && (
+        {!isAuthenticated ? (
           <NavLink
             to="/login"
             onClick={(e) => {
@@ -55,20 +52,13 @@ export default function Navbar() {
               loginWithRedirect()
             }}
             className={({ isActive }) =>
-              `text-sm font-semibold text-foreground ${
-                isActive ? 'underline' : ''
-              }`
+              `${navItemClass} ${isActive ? 'text-[#6a8a62]' : 'text-[#2f2f2f]'}`
             }
           >
             Login
           </NavLink>
-        )}
-
-        {isAuthenticated && (
-          <button
-            onClick={handleLogout}
-            className="text-sm font-semibold text-foreground hover:underline"
-          >
+        ) : (
+          <button onClick={handleLogout} className={navItemClass}>
             Logout
           </button>
         )}
