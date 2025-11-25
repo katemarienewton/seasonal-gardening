@@ -10,7 +10,7 @@ export default function Layout() {
   return (
     <div className="flex min-h-screen flex-col bg-[#f5f1ed] text-foreground">
       <Header />
-      <main className="container mx-auto flex-1 px-4 py-8">
+      <main className="flex-1 px-8 py-8">
         <Outlet
           context={{
             selRegionId,
