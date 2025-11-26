@@ -41,7 +41,7 @@ export default function PlantGuide() {
     <div className="mx-auto mt-24 max-w-5xl px-4 md:px-8">
       <div className="mb-10 flex justify-between">
         <button
-          onClick={() => navigate('/plants')}
+          onClick={() => navigate(-1)}
           className="rounded-full bg-[#e3ead4] px-8 py-3 text-sm font-semibold text-[#2f2f2f] shadow-md transition hover:bg-[#c8d3b3]"
         >
           ← Back to list
