@@ -55,7 +55,7 @@ export default function MonthRegionForm({
           Choose your month and region to grow.
         </h2>
         <p className="text-lg text-[#8c8c8c]">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          A guide to seasonal gardening in New Zealand.
         </p>
       </div>
 

@@ -6,6 +6,7 @@ import { Card, CardContent } from './card'
 import { PlantData } from './../../models/plant'
 
 export default function PlantPage() {
+  console.log('PlantPage mounted')
   const { id } = useParams()
   const navigate = useNavigate()
 

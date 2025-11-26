@@ -23,7 +23,7 @@ export default function Home() {
         />
       </div>
       {/* png */}
-      <div className="pointer-events-none fixed bottom-0 right-0 z-0">
+      <div className="nz-02.png pointer-events-none fixed bottom-0 right-4 z-0">
         <img
           src="/assets/nz-02.png"
           alt="NZ Map"

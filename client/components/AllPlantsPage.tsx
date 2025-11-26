@@ -32,7 +32,9 @@ export default function GetAllPlants() {
     )
   }
 
-  if (isError || !plants) {
+  if (isError) {
+    console.log('plants:', plants)
+
     return (
       <>
         <Navbar />
