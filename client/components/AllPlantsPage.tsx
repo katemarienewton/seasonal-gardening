@@ -12,20 +12,36 @@ interface PlantsLocationState {
   regionHardinessZone?: string
 }
 
+const monthMap: Record<string, string> = {
+  Jan: 'January',
+  Feb: 'February',
+  Mar: 'March',
+  Apr: 'April',
+  May: 'May',
+  Jun: 'June',
+  Jul: 'July',
+  Aug: 'August',
+  Sep: 'September',
+  Oct: 'October',
+  Nov: 'November',
+  Dec: 'December',
+}
+
 export default function AllPlantsPage() {
   const location = useLocation()
   const state = (location.state || {}) as PlantsLocationState
 
   // Fallbacks in case someone hits /plants directly
   const regionName = state.regionName || 'Taranaki'
-  const month = state.month || 'November'
+  const monthAbbrev = state.month || 'Nov' // keep abbreviation for query
+  const monthFull = monthMap[monthAbbrev] // full name for display
   const regionHardinessZone = state.regionHardinessZone || '9b'
 
   const {
     data: plants,
     isLoading,
     isError,
-  } = usePlants(regionHardinessZone, month)
+  } = usePlants(regionHardinessZone, monthAbbrev)
 
   if (isLoading) {
     return (
@@ -46,7 +62,7 @@ export default function AllPlantsPage() {
         <Spacer />
         <main className="mx-auto max-w-6xl px-4 py-8 md:px-8">
           <ThemedText>
-            No plants available for {regionName} in {month}.
+            No plants available for {regionName} in {monthFull}.
           </ThemedText>
         </main>
       </>
@@ -59,7 +75,7 @@ export default function AllPlantsPage() {
       <Spacer />
       <main className="mx-auto max-w-6xl px-4 py-8 md:px-8">
         <ThemedH1 className="mb-4 text-left">
-          You&apos;ve selected {regionName} in {month}.
+          You&apos;ve selected {regionName} in {monthFull}.
         </ThemedH1>
 
         <ThemedText className="mb-8 text-left">
