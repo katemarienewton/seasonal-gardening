@@ -20,6 +20,8 @@ export async function seed(knex) {
       yield_per_plant_max: 3,
       storage: 'Cool (10–15°C), dark, 2–4 months',
       image: '../../public/potato.webp',
+      image2: '../../public/potatoes.webp',
+      image3: '../../public/potatoes1.webp',
     },
     {
       id: 2,
@@ -38,6 +40,8 @@ export async function seed(knex) {
       yield_per_plant_max: 0.4,
       storage: 'Dry, ventilated, months',
       image: '../../public/onion.webp',
+      image2: '../../public/onions.webp',
+      image3: '../../public/onion1.webp',
     },
     {
       id: 3,
@@ -56,6 +60,8 @@ export async function seed(knex) {
       yield_per_plant_max: 5,
       storage: 'Cure 7–10 days, store 2–4 months',
       image: '../../public/pumpkin.webp',
+      image2: '../../public/pumpkinplant.webp',
+      image3: '../../public/pumpkinplant1.webp',
     },
     {
       id: 4,
@@ -73,6 +79,8 @@ export async function seed(knex) {
       yield_per_plant_max: 0.8,
       storage: 'Refrigerate 1–2°C, up to a week',
       image: '../../public/broccoli.webp',
+      image2: '../../public/broccoli3.webp',
+      image3: '../../public/broccoli2.webp',
     },
     {
       id: 5,
@@ -90,6 +98,8 @@ export async function seed(knex) {
       yield_per_plant_max: 1.0,
       storage: 'Refrigerate 1–2°C, use within a week',
       image: '../../public/cauliflower.webp',
+      image2: '../../public/cauliflower1.webp',
+      image3: '../../public/cauliflower2.webp',
     },
     {
       id: 6,
@@ -107,6 +117,8 @@ export async function seed(knex) {
       yield_per_plant_max: 1.5,
       storage: 'Cool 0–2°C, several weeks',
       image: '../../public/cabbage.webp',
+      image2: '../../public/cabbage3.webp',
+      image3: '../../public/cabbage1.webp',
     },
     {
       id: 7,
@@ -124,6 +136,8 @@ export async function seed(knex) {
       yield_per_plant_max: 0.3,
       storage: 'Refrigerate 0–2°C, 5–7 days',
       image: '../../public/lettuce.webp',
+      image2: '../../public/lettuce1.webp',
+      image3: '../../public/lettuce2.webp',
     },
     {
       id: 8,
@@ -141,6 +155,8 @@ export async function seed(knex) {
       yield_per_plant_max: 0.2,
       storage: 'Refrigerate 0–2°C, use within days',
       image: '../../public/spinach.webp',
+      image2: '../../public/spinach1.webp',
+      image3: '../../public/spinach2.webp',
     },
     {
       id: 9,
@@ -158,6 +174,8 @@ export async function seed(knex) {
       yield_per_plant_max: 0.5,
       storage: 'Refrigerate 0–2°C, ~5–7 days',
       image: '../../public/silverbeet.webp',
+      image2: '../../public/silverbeet1.webp',
+      image3: '../../public/silverbeet3.webp',
     },
     {
       id: 10,
@@ -175,6 +193,8 @@ export async function seed(knex) {
       yield_per_plant_max: 0.6,
       storage: 'Refrigerate, use within 7–10 days',
       image: '../../public/kale.webp',
+      image2: '../../public/kale1.webp',
+      image3: '../../public/kale3.webp',
     },
     {
       id: 11,
@@ -192,6 +212,8 @@ export async function seed(knex) {
       yield_per_plant_max: 0.6,
       storage: 'Refrigerate 0–2°C, 3–5 days',
       image: '../../public/sweet-pea.webp',
+      image2: '../../public/peas1.webp',
+      image3: '../../public/peas2.webp',
     },
     {
       id: 12,
@@ -209,6 +231,8 @@ export async function seed(knex) {
       yield_per_plant_max: 0.5,
       storage: 'Refrigerate 0–2°C, 3–5 days',
       image: '../../public/green-beans.webp',
+      image2: '../../public/greenbean1.webp',
+      image3: '../../public/greenbean2.webp',
     },
     {
       id: 13,
@@ -226,6 +250,8 @@ export async function seed(knex) {
       yield_per_plant_max: 0.2,
       storage: 'Cool, dark, ventilated, 2–3 months',
       image: '../../public/carrots.webp',
+      image2: '../../public/carrots3.webp',
+      image3: '../../public/carrots4.webp',
     },
     {
       id: 14,
@@ -243,6 +269,8 @@ export async function seed(knex) {
       yield_per_plant_max: 0.4,
       storage: 'Cool dark, 2–3 months',
       image: '../../public/beetroot.webp',
+      image2: '../../public/beetroot1.webp',
+      image3: '../../public/beetroot3.webp',
     },
     {
       id: 15,
@@ -260,6 +288,8 @@ export async function seed(knex) {
       yield_per_plant_max: 0.5,
       storage: 'Cool, dark, ventilated; 3–4 months',
       image: '../../public/parsnip-plant.webp',
+      image2: '../../public/parsnip1.webp',
+      image3: '../../public/parsnip2.webp',
     },
     {
       id: 16,
@@ -277,6 +307,8 @@ export async function seed(knex) {
       yield_per_plant_max: 3,
       storage: 'Cure 7–10 days, store at 12–15°C',
       image: '../../public/kumera.webp',
+      image2: '../../public/kumera1.webp',
+      image3: '../../public/kumera2.webp',
     },
     {
       id: 17,
@@ -294,6 +326,8 @@ export async function seed(knex) {
       yield_per_plant_max: 6,
       storage: 'Best fresh; short refrigeration possible',
       image: '../../public/tomato.webp',
+      image2: '../../public/tomatoes1.webp',
+      image3: '../../public/tomatoplant2.webp',
     },
     {
       id: 18,
@@ -311,6 +345,8 @@ export async function seed(knex) {
       yield_per_plant_max: 4,
       storage: 'Cool, ~7–10°C, 1–2 weeks',
       image: '../../public/bell-pepper.webp',
+      image2: '../../public/bellpepper.webp',
+      image3: '../../public/bellpepper1.webp',
     },
     {
       id: 19,
@@ -328,6 +364,8 @@ export async function seed(knex) {
       yield_per_plant_max: 8,
       storage: 'Use fresh; refrigerate short term',
       image: '../../public/cucumber.webp',
+      image2: '../../public/cucumber1.webp',
+      image3: '../../public/cucumber2.webp',
     },
     {
       id: 20,
@@ -345,6 +383,8 @@ export async function seed(knex) {
       yield_per_plant_max: 0.8,
       storage: 'Cool, dark, ventilated; 2–3 months',
       image: '../../public/turnip.webp',
+      image2: '../../public/turnip1.webp',
+      image3: '../../public/turnip2.webp',
     },
   ])
 }

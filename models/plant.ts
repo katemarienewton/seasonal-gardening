@@ -14,6 +14,8 @@ export interface PlantData {
   yieldPerPlantMax: number
   storage: string
   image: string
+  image2: string
+  image3: string
   soilType: string
   soilPreparation: string
   spacingRowCm: string
