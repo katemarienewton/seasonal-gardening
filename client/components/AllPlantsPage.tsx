@@ -65,7 +65,7 @@ export default function AllPlantsPage() {
 
   return (
     <>
-      <main className="mx-auto max-w-6xl px-4 py-8 md:px-8">
+      <main>
         <ThemedH1 className="mb-4 text-left">
           You&apos;ve selected {regionName} in {monthFull}.
         </ThemedH1>
