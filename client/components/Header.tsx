@@ -1,15 +1,11 @@
-//import Navbar from './Navbar'
 import Navbar from './Navbar'
 import ThemedH1 from './theme/ThemedHeader'
 
 export default function Header() {
   return (
-    <header className="w-full bg-[#F5F2ED] shadow-sm">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        {/* LOGO LEFT */}
+    <header className="w-full bg-[#f5f1ed]">
+      <div className="flex items-center justify-between px-8 py-4">
         <ThemedH1 className="text-[#2f2f2f]">GroWise</ThemedH1>
-
-        {/* NAVBAR RIGHT */}
         <Navbar />
       </div>
     </header>

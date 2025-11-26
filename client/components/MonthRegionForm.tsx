@@ -1,138 +1,103 @@
 import { useEffect, useState } from 'react'
 import { useGetAllRegions } from '../hooks/useRegions'
-import Spacer from './theme/Spacer'
-import ThemedH1 from './theme/ThemedHeader'
-import ThemedText from './theme/ThemedText'
 import { useNavigate } from 'react-router'
+import FormRow from './theme/FormRow'
+import InputSelect from './theme/InputSelect'
+import Button from './theme/Button'
 
 const months = [
   { January: 'Jan' },
   { February: 'Feb' },
   { March: 'Mar' },
-  { April: 'April' },
+  { April: 'Apr' },
   { May: 'May' },
   { June: 'Jun' },
   { July: 'Jul' },
   { August: 'Aug' },
-  { September: 'Sept' },
+  { September: 'Sep' },
   { October: 'Oct' },
   { November: 'Nov' },
   { December: 'Dec' },
 ]
 
-interface AppContext {
+interface MonthRegionFormProps {
   selRegionId: string
   setSelRegionId: React.Dispatch<React.SetStateAction<string>>
   selMonth: string
   setSelMonth: React.Dispatch<React.SetStateAction<string>>
 }
 
-function MonthRegionForm({
+export default function MonthRegionForm({
   selRegionId,
   setSelRegionId,
   selMonth,
   setSelMonth,
-}: AppContext) {
+}: MonthRegionFormProps) {
   const regionQuery = useGetAllRegions()
   const [btnDisabled, setBtnDisabled] = useState(true)
-
   const navigate = useNavigate()
+
+  useEffect(
+    () => setBtnDisabled(!(selRegionId && selMonth)),
+    [selRegionId, selMonth],
+  )
 
   const handleChange = (
     e: React.ChangeEvent<HTMLSelectElement>,
     setter: React.Dispatch<React.SetStateAction<string>>,
-  ) => {
-    setter(e.target.value)
-  }
+  ) => setter(e.target.value)
+  const handleSubmit = () => navigate('/plants')
 
-  useEffect(() => {
-    if (selRegionId != '' && selMonth != '') {
-      setBtnDisabled(false)
-      console.log('button enabled')
-    }
-  }, [selRegionId, selMonth])
-
-  const handleSubmit = () => {
-    console.log('submitted')
-    navigate('/app')
-  }
   return (
-    <div className="flex-2 m-3 flex flex-col flex-wrap  p-5">
-      <div>
-        <ThemedH1>Choose your month and region to grow.</ThemedH1>
-        <ThemedText>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
-          vestibulum
-        </ThemedText>
+    <div className="flex w-full flex-col gap-6">
+      <div className="w-full max-w-2xl">
+        <h2 className="mb-4 text-2xl font-semibold md:text-3xl lg:text-4xl">
+          Choose your month and region to grow.
+        </h2>
+        <p className="text-lg text-[#8c8c8c]">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        </p>
       </div>
-      <Spacer />
-      <form onSubmit={() => handleSubmit()}>
-        <div className="flex  gap-20 md:gap-32">
-          <label htmlFor="region">
-            <ThemedH1>Region.</ThemedH1>
-          </label>
-          <select
+
+      <div className="flex w-full max-w-lg flex-col gap-6">
+        <FormRow label="Region.">
+          <InputSelect
             value={selRegionId}
-            onChange={(e) => {
-              handleChange(e, setSelRegionId)
-            }}
-            className="appearance-none rounded-[40px] bg-[#e5e4e3] px-10 py-4 text-center text-[clamp(14px,3vw,20px)] font-medium text-[#2f2f2f] md:px-16 "
-            name="region"
-            id="region"
+            onChange={(e) => handleChange(e, setSelRegionId)}
           >
             <option value="">Select Region</option>
-            {regionQuery.data?.map((region) => {
-              return (
-                <option value={region.id} key={region.id}>
-                  {region.name}
-                </option>
-              )
-            })}
-          </select>
-        </div>
-        <Spacer className="h-10" />
-        <div className="flex gap-20 md:gap-32">
-          <label htmlFor="month">
-            <ThemedH1>Month.</ThemedH1>
-          </label>
-          <select
+            {regionQuery.data?.map((r) => (
+              <option key={r.id} value={r.id}>
+                {r.name}
+              </option>
+            ))}
+          </InputSelect>
+        </FormRow>
+
+        <FormRow label="Month.">
+          <InputSelect
             value={selMonth}
-            onChange={(e) => {
-              handleChange(e, setSelMonth)
-            }}
-            className="appearance-none rounded-[40px] bg-[#e5e4e3] px-10 py-4 text-center text-[clamp(14px,3vw,20px)] font-medium text-[#2f2f2f] md:px-16 "
-            name="month"
-            id="month"
+            onChange={(e) => handleChange(e, setSelMonth)}
           >
             <option value="">Select Month</option>
-            {months.map((month) => {
-              const [key, value] = Object.entries(month)[0]
+            {months.map((m) => {
+              const [key, value] = Object.entries(m)[0]
               return (
                 <option key={value} value={value}>
                   {key}
                 </option>
               )
             })}
-          </select>
-        </div>
-        <Spacer />
-        <div className="flex justify-center md:justify-start ">
-          <button
-            disabled={!regionQuery.isSuccess || btnDisabled}
-            className="w-1/2 cursor-pointer rounded-full bg-[#e3ead4] px-12 py-4 font-semibold text-[#2f2f2f] hover:bg-[#aaaf9f]   "
-            // type="submit"
-          >
-            Go!
-          </button>
-        </div>
-      </form>
-      {regionQuery.isError ? (
-        <p> an error occurred when loading regions. Please refresh</p>
-      ) : (
-        <p></p>
-      )}
+          </InputSelect>
+        </FormRow>
+
+        <Button
+          disabled={!regionQuery.isSuccess || btnDisabled}
+          onClick={handleSubmit}
+        >
+          Go!
+        </Button>
+      </div>
     </div>
   )
 }
-
-export default MonthRegionForm

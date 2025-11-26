@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import { useParams, useNavigate } from 'react-router'
 import { useState } from 'react'
-import { Button } from '../../src/components/ui/button'
-import { Card, CardContent } from '../../src/components/ui/card'
+import { Button } from './button'
+import { Card, CardContent } from './card'
 import { PlantData } from './../../models/plant'
 
 export default function PlantPage() {

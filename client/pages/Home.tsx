@@ -8,22 +8,28 @@ interface AppContext {
   setSelMonth: React.Dispatch<React.SetStateAction<string>>
 }
 
-function Home() {
+export default function Home() {
   const { selRegionId, setSelRegionId, selMonth, setSelMonth } =
     useOutletContext<AppContext>()
+
   return (
-    <div className="mx-auto flex w-4/5 flex-1">
-      <MonthRegionForm
-        selMonth={selMonth}
-        selRegionId={selRegionId}
-        setSelMonth={setSelMonth}
-        setSelRegionId={setSelRegionId}
-      />
-      <div className="-ml-64 mt-16 flex-1">
-        <img src="../../public/assets/nz-02.png" alt="map of nz" />
+    <div className="relative flex w-full flex-col lg:flex-row">
+      <div className="z-10">
+        <MonthRegionForm
+          selMonth={selMonth}
+          selRegionId={selRegionId}
+          setSelMonth={setSelMonth}
+          setSelRegionId={setSelRegionId}
+        />
+      </div>
+      {/* png */}
+      <div className="pointer-events-none fixed bottom-0 right-0 z-0">
+        <img
+          src="/assets/nz-02.png"
+          alt="NZ Map"
+          className="h-auto max-h-[80vh] w-auto object-contain opacity-100 lg:max-h-[90vh]"
+        />
       </div>
     </div>
   )
 }
-
-export default Home
