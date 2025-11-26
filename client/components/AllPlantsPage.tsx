@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import ThemedH1 from '../components/theme/ThemedHeader'
 import ThemedText from '../components/theme/ThemedText'
-import Spacer from '../components/theme/Spacer'
 import { usePlants } from '../hooks/usePlants'
 
 interface PlantsLocationState {
@@ -45,7 +44,6 @@ export default function AllPlantsPage() {
   if (isLoading) {
     return (
       <>
-        <Spacer />
         <main className="mx-auto max-w-6xl px-4 py-8 md:px-8">
           <ThemedText>Loading plants…</ThemedText>
         </main>
@@ -56,7 +54,6 @@ export default function AllPlantsPage() {
   if (isError || !plants || plants.length === 0) {
     return (
       <>
-        <Spacer />
         <main className="mx-auto max-w-6xl px-4 py-8 md:px-8">
           <ThemedText>
             No plants available for {regionName} in {monthFull}.
@@ -68,7 +65,6 @@ export default function AllPlantsPage() {
 
   return (
     <>
-      <Spacer />
       <main className="mx-auto max-w-6xl px-4 py-8 md:px-8">
         <ThemedH1 className="mb-4 text-left">
           You&apos;ve selected {regionName} in {monthFull}.
