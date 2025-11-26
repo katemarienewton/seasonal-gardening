@@ -46,7 +46,22 @@ export default function MonthRegionForm({
     e: React.ChangeEvent<HTMLSelectElement>,
     setter: React.Dispatch<React.SetStateAction<string>>,
   ) => setter(e.target.value)
-  const handleSubmit = () => navigate('/plants')
+
+  const handleSubmit = () => {
+    const selectedRegion = regionQuery.data?.find(
+      (region) => region.id.toString() === selRegionId,
+    )
+
+    if (!selectedRegion) return
+
+    navigate('/plants', {
+      state: {
+        regionName: selectedRegion.name,
+        regionHardinessZone: selectedRegion.hardiness_zone,
+        month: selMonth,
+      },
+    })
+  }
 
   return (
     <div className="flex w-full flex-col gap-6">

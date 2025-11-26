@@ -9,16 +9,23 @@ import { usePlants } from '../hooks/usePlants'
 interface PlantsLocationState {
   regionName?: string
   month?: string
+  regionHardinessZone?: string
 }
 
-export default function GetAllPlants() {
-  const { data: plants, isLoading, isError } = usePlants()
+export default function AllPlantsPage() {
   const location = useLocation()
   const state = (location.state || {}) as PlantsLocationState
 
   // Fallbacks in case someone hits /plants directly
   const regionName = state.regionName || 'Taranaki'
   const month = state.month || 'November'
+  const regionHardinessZone = state.regionHardinessZone || '9b'
+
+  const {
+    data: plants,
+    isLoading,
+    isError,
+  } = usePlants(regionHardinessZone, month)
 
   if (isLoading) {
     return (
@@ -32,15 +39,15 @@ export default function GetAllPlants() {
     )
   }
 
-  if (isError) {
-    console.log('plants:', plants)
-
+  if (isError || !plants || plants.length === 0) {
     return (
       <>
         <Navbar />
         <Spacer />
         <main className="mx-auto max-w-6xl px-4 py-8 md:px-8">
-          <ThemedText>Something went wrong loading plants.</ThemedText>
+          <ThemedText>
+            No plants available for {regionName} in {month}.
+          </ThemedText>
         </main>
       </>
     )

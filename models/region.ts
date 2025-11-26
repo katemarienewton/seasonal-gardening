@@ -1,6 +1,6 @@
 export interface Region {
   id: number
   name: string
-  zone: string
+  hardiness_zone: string
   notes: string
 }
