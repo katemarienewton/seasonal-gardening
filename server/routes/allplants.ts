@@ -7,7 +7,8 @@ const router = express.Router()
 router.get('/', async (req, res) => {
   try {
     const plants = await db.getAllPlants()
-    res.json({ plants })
+    console.log('plants:', plants)
+    res.json(plants)
   } catch (error) {
     console.error(
       error instanceof Error ? error.message : 'Error getting all plants',
