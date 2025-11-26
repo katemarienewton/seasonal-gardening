@@ -78,25 +78,31 @@ export default function AllPlantsPage() {
           {plants.map((veg) => (
             <article
               key={veg.id}
-              className="flex h-full flex-col rounded-2xl bg-[#f5f2ed] p-5 shadow-md"
+              className="flex flex-col overflow-hidden rounded-2xl bg-[#f5f2ed] shadow-md"
             >
-              <img
-                src={veg.image}
-                alt={veg.name}
-                className="mb-4 h-64 w-full rounded-xl object-cover"
-              />
-
-              <div className="flex flex-1 flex-col gap-2">
-                <ThemedH1 className="text-left">{veg.name}</ThemedH1>
-                <ThemedText className="text-left">{veg.description}</ThemedText>
+              <div className="aspect-[3/2] w-full">
+                <img
+                  src={veg.image}
+                  alt={veg.name}
+                  className="h-full w-full object-cover"
+                />
               </div>
 
-              <Link
-                to={`/plant/${veg.id}/guide`}
-                className="mt-4 self-start text-sm font-semibold text-[#2f2f2f] hover:text-[#B8C2A1]"
-              >
-                Click to learn more →
-              </Link>
+              <div className="flex flex-1 flex-col gap-4 p-5">
+                <div className="flex flex-col gap-2">
+                  <ThemedH1 className="text-left text-xl">{veg.name}</ThemedH1>
+                  <ThemedText className="text-left text-lg">
+                    {veg.description}
+                  </ThemedText>
+                </div>
+
+                <Link
+                  to={`/plant/${veg.id}/guide`}
+                  className="mt-auto text-sm font-semibold text-[#2f2f2f] hover:text-[#B8C2A1]"
+                >
+                  Click to learn more →
+                </Link>
+              </div>
             </article>
           ))}
         </div>
