@@ -15,7 +15,7 @@ export default createRoutesFromElements(
     <Route path="app" element={<App />} />
     <Route path="plant/:id" element={<PlantPage />} />
     <Route path="plant/:id/guide" element={<PlantGuide />} />
-    <Route path="plant" element={<AllPlantsPage />} />
+    <Route path="plants" element={<AllPlantsPage />} />
     <Route path="my-garden" element={<MyGarden />} />
     <Route path="profile" element={<MyProfile />} />
     <Route path="profile/edit" element={<EditProfile />} />
