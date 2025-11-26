@@ -26,7 +26,15 @@ export default function PlantGuide() {
     return <p className="mt-24 text-center">Guide not found.</p>
 
   const handleAddToGarden = () => {
-    console.log(`Added ${plant.name} (id: ${plant.id}) to garden`)
+    const existing = JSON.parse(localStorage.getItem('myGarden') || '[]')
+    const alreadyAdded = existing.some((p: PlantData) => p.id === plant.id)
+
+    if (!alreadyAdded) {
+      existing.push(plant)
+      localStorage.setItem('myGarden', JSON.stringify(existing))
+    }
+
+    navigate('/my-garden')
   }
 
   return (
