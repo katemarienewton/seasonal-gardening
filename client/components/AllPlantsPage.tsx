@@ -98,7 +98,7 @@ export default function AllPlantsPage() {
 
                 <Link
                   to={`/plant/${veg.id}/guide`}
-                  className="mt-auto text-sm font-semibold text-[#2f2f2f] hover:text-[#B8C2A1]"
+                  state={{ regionName, month: monthFull }}
                 >
                   Click to learn more →
                 </Link>
