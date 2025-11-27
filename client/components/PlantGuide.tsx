@@ -147,6 +147,8 @@ export default function PlantGuide() {
                 <strong>Yield max:</strong> {plant.yieldPerPlantMax}
               </p>
             </div>
+            <h2 className="mb-2 text-2xl font-semibold">Storage</h2>
+            <p>{plant.storage}</p>
           </div>
 
           <img
