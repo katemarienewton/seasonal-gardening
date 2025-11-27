@@ -20,6 +20,8 @@ export async function getPlantDetail(id: number): Promise<PlantData> {
       'vegetables.yield_per_plant_max as yieldPerPlantMax',
       'vegetables.storage',
       'vegetables.image',
+      'vegetables.image2',
+      'vegetables.image3',
       'soil.id as soilId',
       'soil.type as soilType',
       'soil.preparation as soilPreparation',
