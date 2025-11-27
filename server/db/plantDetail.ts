@@ -1,7 +1,7 @@
 import { PlantData } from '../../models/plant'
 import db from './connection'
 
-export async function getPlantDetail(id: number): Promise<PlantData[]> {
+export async function getPlantDetail(id: number): Promise<PlantData> {
   const plantDetail = await db('vegetables')
     .join('soil', 'vegetables.soil_id', 'soil.id')
     .join('spacing', 'vegetables.spacing_id', 'spacing.id')
@@ -39,5 +39,5 @@ export async function getPlantDetail(id: number): Promise<PlantData[]> {
       // 'vegetable.staking_id as stakingId',
     )
     .first()
-  return plantDetail
+  return plantDetail as PlantData
 }

@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
-import { useParams } from 'react-router'
+import { useParams, useNavigate } from 'react-router-dom'
 import { PlantData } from './../../models/plant'
 import { Card, CardContent } from './card'
 
 export default function PlantGuide() {
   const { id } = useParams()
+  const navigate = useNavigate()
 
   const {
     data: plant,
@@ -24,8 +25,36 @@ export default function PlantGuide() {
   if (isError || !plant)
     return <p className="mt-24 text-center">Guide not found.</p>
 
+  const handleAddToGarden = () => {
+    const existing = JSON.parse(localStorage.getItem('myGarden') || '[]')
+    const alreadyAdded = existing.some((p: PlantData) => p.id === plant.id)
+
+    if (!alreadyAdded) {
+      existing.push(plant)
+      localStorage.setItem('myGarden', JSON.stringify(existing))
+    }
+
+    navigate('/my-garden')
+  }
+
   return (
-    <div className="mx-auto mt-24 max-w-5xl space-y-12 px-4 md:px-8">
+    <div className="mx-auto mt-24 max-w-5xl px-4 md:px-8">
+      <div className="mb-10 flex justify-between">
+        <button
+          onClick={() => navigate(-1)}
+          className="rounded-full bg-[#e3ead4] px-8 py-3 text-sm font-semibold text-[#2f2f2f] shadow-md transition hover:bg-[#c8d3b3]"
+        >
+          ← Back to list
+        </button>
+
+        <button
+          onClick={handleAddToGarden}
+          className="rounded-full bg-[#e3ead4] px-8 py-3 text-sm font-semibold text-[#2f2f2f] shadow-md transition hover:bg-[#c8d3b3]"
+        >
+          + Add to My Garden
+        </button>
+      </div>
+
       <Card className="shadow-lg">
         <CardContent className="flex flex-col items-start gap-10 py-8 md:flex-row">
           <div className="flex-1">

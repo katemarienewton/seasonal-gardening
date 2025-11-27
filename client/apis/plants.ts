@@ -3,7 +3,15 @@ import { PlantData } from '../../models/plant'
 
 const rootURL = '/api/v1'
 
-export async function getPlants(): Promise<PlantData[]> {
-  const res = await request.get(`${rootURL}/plants`)
-  return res.body.plants as PlantData[]
+export async function getPlants(
+  regionHardinessZone?: string,
+  month?: string,
+): Promise<PlantData[]> {
+  let req = request.get(`${rootURL}/plants`)
+
+  if (regionHardinessZone) req = req.query({ regionHardinessZone })
+  if (month) req = req.query({ month })
+
+  const res = await req
+  return res.body as PlantData[]
 }
