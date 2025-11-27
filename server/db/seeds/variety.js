@@ -367,5 +367,223 @@ export async function seed(knex) {
       name: 'Red Russian',
       notes: 'Common cultivar: Red Russian',
     },
+    {
+      id: 62,
+      vege_id: 21,
+      name: 'Granny Smith',
+      notes: 'Common cultivar: Granny Smith',
+    },
+    {
+      id: 63,
+      vege_id: 21,
+      name: 'Royal Gala',
+      notes: 'Common cultivar: Royal Gala',
+    },
+    {
+      id: 64,
+      vege_id: 21,
+      name: 'Braeburn',
+      notes: 'Common cultivar: Braeburn',
+    },
+
+    { id: 65, vege_id: 22, name: 'Hass', notes: 'Common cultivar: Hass' },
+    { id: 66, vege_id: 22, name: 'Fuerte', notes: 'Common cultivar: Fuerte' },
+    { id: 67, vege_id: 22, name: 'Bacon', notes: 'Common cultivar: Bacon' },
+
+    {
+      id: 68,
+      vege_id: 23,
+      name: 'Genovese',
+      notes: 'Common cultivar: Genovese',
+    },
+    {
+      id: 69,
+      vege_id: 23,
+      name: 'Purple Ruffles',
+      notes: 'Common cultivar: Purple Ruffles',
+    },
+    {
+      id: 70,
+      vege_id: 23,
+      name: 'Lemon Basil',
+      notes: 'Common cultivar: Lemon Basil',
+    },
+
+    {
+      id: 71,
+      vege_id: 24,
+      name: 'Bluecrop',
+      notes: 'Common cultivar: Bluecrop',
+    },
+    { id: 72, vege_id: 24, name: 'Duke', notes: 'Common cultivar: Duke' },
+    {
+      id: 73,
+      vege_id: 24,
+      name: 'Chandler',
+      notes: 'Common cultivar: Chandler',
+    },
+
+    {
+      id: 74,
+      vege_id: 25,
+      name: 'Common Chives',
+      notes: 'Common cultivar: Common Chives',
+    },
+    {
+      id: 75,
+      vege_id: 25,
+      name: 'Garlic Chives',
+      notes: 'Common cultivar: Garlic Chives',
+    },
+    {
+      id: 76,
+      vege_id: 25,
+      name: 'Forescate',
+      notes: 'Common cultivar: Forescate',
+    },
+
+    { id: 77, vege_id: 26, name: 'Santo', notes: 'Common cultivar: Santo' },
+    { id: 78, vege_id: 26, name: 'Leisure', notes: 'Common cultivar: Leisure' },
+    { id: 79, vege_id: 26, name: 'Calypso', notes: 'Common cultivar: Calypso' },
+
+    { id: 80, vege_id: 32, name: 'Mammoth', notes: 'Common cultivar: Mammoth' },
+    { id: 81, vege_id: 32, name: 'Triumph', notes: 'Common cultivar: Triumph' },
+    { id: 82, vege_id: 32, name: 'Apollo', notes: 'Common cultivar: Apollo' },
+
+    {
+      id: 83,
+      vege_id: 33,
+      name: 'Italian Purple',
+      notes: 'Common cultivar: Italian Purple',
+    },
+    {
+      id: 84,
+      vege_id: 33,
+      name: 'Chesnok Red',
+      notes: 'Common cultivar: Chesnok Red',
+    },
+    {
+      id: 85,
+      vege_id: 33,
+      name: 'California Early',
+      notes: 'Common cultivar: California Early',
+    },
+
+    { id: 86, vege_id: 34, name: 'Eureka', notes: 'Common cultivar: Eureka' },
+    { id: 87, vege_id: 34, name: 'Meyer', notes: 'Common cultivar: Meyer' },
+    { id: 88, vege_id: 34, name: 'Lisbon', notes: 'Common cultivar: Lisbon' },
+
+    {
+      id: 89,
+      vege_id: 27,
+      name: 'Spearmint',
+      notes: 'Common cultivar: Spearmint',
+    },
+    {
+      id: 90,
+      vege_id: 27,
+      name: 'Peppermint',
+      notes: 'Common cultivar: Peppermint',
+    },
+    {
+      id: 91,
+      vege_id: 27,
+      name: 'Chocolate Mint',
+      notes: 'Common cultivar: Chocolate Mint',
+    },
+
+    {
+      id: 92,
+      vege_id: 35,
+      name: 'Valencia',
+      notes: 'Common cultivar: Valencia',
+    },
+    {
+      id: 93,
+      vege_id: 35,
+      name: 'Washington Navel',
+      notes: 'Common cultivar: Washington Navel',
+    },
+    {
+      id: 94,
+      vege_id: 35,
+      name: 'Blood Orange',
+      notes: 'Common cultivar: Blood Orange',
+    },
+
+    {
+      id: 95,
+      vege_id: 28,
+      name: 'Italian Flat Leaf',
+      notes: 'Common cultivar: Italian Flat Leaf',
+    },
+    { id: 96, vege_id: 28, name: 'Curly', notes: 'Common cultivar: Curly' },
+    { id: 97, vege_id: 28, name: 'Hamburg', notes: 'Common cultivar: Hamburg' },
+
+    { id: 98, vege_id: 36, name: 'Elberta', notes: 'Common cultivar: Elberta' },
+    {
+      id: 99,
+      vege_id: 36,
+      name: 'Redhaven',
+      notes: 'Common cultivar: Redhaven',
+    },
+    {
+      id: 100,
+      vege_id: 36,
+      name: "O'Henry",
+      notes: "Common cultivar: O'Henry",
+    },
+
+    {
+      id: 101,
+      vege_id: 29,
+      name: 'Common Sage',
+      notes: 'Common cultivar: Common Sage',
+    },
+    {
+      id: 102,
+      vege_id: 29,
+      name: 'Purple Sage',
+      notes: 'Common cultivar: Purple Sage',
+    },
+    {
+      id: 103,
+      vege_id: 29,
+      name: 'Berggarten',
+      notes: 'Common cultivar: Berggarten',
+    },
+
+    {
+      id: 104,
+      vege_id: 30,
+      name: 'Honeoye',
+      notes: 'Common cultivar: Honeoye',
+    },
+    { id: 105, vege_id: 30, name: 'Albion', notes: 'Common cultivar: Albion' },
+    {
+      id: 106,
+      vege_id: 30,
+      name: 'Cambridge Favourite',
+      notes: 'Common cultivar: Cambridge Favourite',
+    },
+
+    {
+      id: 107,
+      vege_id: 31,
+      name: 'Sugar Baby',
+      notes: 'Common cultivar: Sugar Baby',
+    },
+    {
+      id: 108,
+      vege_id: 31,
+      name: 'Crimson Sweet',
+      notes: 'Common cultivar: Crimson Sweet',
+    },
+    {
+      id: 109,
+      vege_id: 31,
+      name: 'Charleston Gray',
+      notes: 'Common cultivar: Charleston Gray',
+    },
   ])
 }

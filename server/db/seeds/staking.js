@@ -16,5 +16,12 @@ export async function seed(knex) {
       notes:
         'Use strong stakes early; tie loosely every 20–30 cm as plant grows',
     },
+
+    {
+      id: 4,
+      required: 'true',
+      notes:
+        'Stake young trees for the first 1–2 years to establish a strong trunk',
+    },
   ])
 }
