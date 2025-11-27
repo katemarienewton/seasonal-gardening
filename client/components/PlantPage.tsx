@@ -1,13 +1,25 @@
 import { useQuery } from '@tanstack/react-query'
-import { useParams, useNavigate } from 'react-router'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { useState } from 'react'
 import { Button } from './button'
 import { Card, CardContent } from './card'
 import { PlantData } from './../../models/plant'
+import ThemedH1 from './theme/ThemedHeader'
+import ThemedText from './theme/ThemedText'
 
 export default function PlantPage() {
   console.log('PlantPage mounted')
+
   const { id } = useParams()
+
+  const location = useLocation()
+  const state = location.state as {
+    regionName?: string
+    month?: string
+  }
+  const regionName = state?.regionName || 'your region'
+  const month = state?.month || 'this month'
+
   const navigate = useNavigate()
 
   const [showDetail, setShowDetail] = useState(false)
@@ -38,6 +50,16 @@ export default function PlantPage() {
 
   return (
     <div className="mt-24 px-4 md:px-8">
+      <div className="mx-auto max-w-5xl">
+        <ThemedH1 className="mb-4 text-left">
+          You&apos;ve selected to grow {vegetable.name} in {regionName} in{' '}
+          {month}.
+        </ThemedH1>
+
+        <ThemedText className="mb-10 text-left">
+          Here&apos;s some tips and tricks for this growing season:
+        </ThemedText>
+      </div>
       <Card className="mx-auto max-w-5xl p-8 shadow-lg">
         <CardContent className="flex flex-col items-start gap-8 md:flex-row">
           {/* LEFT SIDE — TEXT */}
