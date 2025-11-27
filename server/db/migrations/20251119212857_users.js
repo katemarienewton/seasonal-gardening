@@ -6,10 +6,6 @@ export async function up(knex) {
   return knex.schema.createTable('users', (table) => {
     table.increments('id')
     table.string('auth0_id')
-    table.string('email')
-    table.integer('region_id')
-  
-    
   })
 }
 
