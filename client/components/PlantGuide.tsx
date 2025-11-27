@@ -72,31 +72,32 @@ export default function PlantGuide() {
         </button>
       </div> */}
 
-      <Card className="mb-8 shadow-lg">
-        <CardContent className="flex flex-col items-start gap-10 py-8 md:flex-row">
-          <div className="flex-1">
+      <Card className="mb-8 overflow-hidden rounded-lg border-0 bg-[#f5f1ed] shadow-none">
+        <CardContent className="flex flex-col gap-8 p-0 md:flex-row">
+          <div className="flex-1 space-y-6 p-8">
             <h1 className="mb-2 text-4xl font-bold">{plant.name}</h1>
             <em className="mb-4 block text-gray-600">{plant.scientificName}</em>
             <p className="leading-relaxed text-gray-800">{plant.description}</p>
           </div>
-
           <img
             src={plant.image}
             alt={plant.name}
-            className="w-full rounded-lg object-cover shadow-md md:w-80"
+            className="w-full rounded-lg  object-cover md:w-[400px]"
           />
         </CardContent>
       </Card>
 
-      <Card className="mb-8 shadow-lg">
-        <CardContent className="flex flex-col items-start gap-10 py-8 md:flex-row">
-          <img
-            src={plant.image2 || plant.image}
-            alt="Growing Conditions"
-            className="w-full rounded-lg object-cover p-2 shadow-md md:w-72"
-          />
+      <Card className="mb-8 overflow-hidden rounded-lg border-0 bg-[#f5f1ed] shadow-none">
+        <CardContent className="flex flex-col gap-8 p-0 md:flex-row">
+          <div className="flex flex-shrink-0 md:h-auto md:w-[400px]">
+            <img
+              src={plant.image2 || plant.image}
+              alt="Growing Conditions"
+              className="h-full w-full rounded-lg object-cover"
+            />
+          </div>
 
-          <div className="flex-1 space-y-6 pl-4 md:pl-8">
+          <div className="flex-1 space-y-6 p-8">
             <div>
               <h2 className="mb-2 text-2xl font-semibold">Soil</h2>
               <p>
@@ -138,9 +139,10 @@ export default function PlantGuide() {
         </CardContent>
       </Card>
 
-      <Card className="mb-8 shadow-lg">
-        <CardContent className="flex flex-col items-start gap-10 py-8 md:flex-row">
-          <div className="flex-1 space-y-6">
+      <Card className="mb-8 overflow-hidden rounded-lg border-0 bg-[#f5f1ed] shadow-none">
+        <CardContent className="flex flex-col gap-8 p-0 md:flex-row">
+          {/* LEFT — TEXT with padding */}
+          <div className="flex-1 space-y-6 p-8">
             <div>
               <h2 className="mb-2 text-2xl font-semibold">Staking</h2>
               <p>
@@ -164,15 +166,21 @@ export default function PlantGuide() {
                 <strong>Yield max:</strong> {plant.yieldPerPlantMax} kg
               </p>
             </div>
-            <h2 className="mb-2 text-2xl font-semibold">Storage</h2>
-            <p>{plant.storage}</p>
+
+            <div>
+              <h2 className="mb-2 text-2xl font-semibold">Storage</h2>
+              <p>{plant.storage}</p>
+            </div>
           </div>
 
-          <img
-            src={plant.image3 || plant.image}
-            alt="Harvest"
-            className="w-full rounded-lg object-cover shadow-md md:w-80"
-          />
+          {/* RIGHT — IMAGE filling full height */}
+          <div className="flex flex-shrink-0 md:h-auto md:w-[400px]">
+            <img
+              src={plant.image3 || plant.image}
+              alt="Harvest"
+              className="h-full w-full rounded-lg object-cover"
+            />
+          </div>
         </CardContent>
       </Card>
     </main>
