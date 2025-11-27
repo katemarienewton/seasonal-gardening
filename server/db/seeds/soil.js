@@ -29,5 +29,32 @@ export async function seed(knex) {
       type: 'Slightly acidic fertile soil',
       preparation: 'Test pH; add lime if needed, then compost',
     },
+    {
+      id: 6,
+      type: 'Acidic, free-draining sandy loam',
+      preparation:
+        'Incorporate peat moss or pine bark to lower pH for acid-loving plants',
+    },
+    {
+      id: 7,
+      type: 'Fertile, moist well-drained garden soil',
+      preparation: 'Add compost annually and mulch to retain moisture',
+    },
+    {
+      id: 8,
+      type: 'Light, fertile soil with good drainage',
+      preparation: 'Mix in compost and ensure soil is not compacted',
+    },
+    {
+      id: 9,
+      type: 'Warm, sandy loam',
+      preparation:
+        'Raise beds or mounds to improve heat retention and drainage',
+    },
+    {
+      id: 10,
+      type: 'Rich, moisture-retentive soil',
+      preparation: 'Add compost and mulch thickly to maintain moisture',
+    },
   ])
 }

@@ -141,10 +141,10 @@ export default function PlantGuide() {
                 <strong>Max days:</strong> {plant.daysToHarvestMax}
               </p>
               <p>
-                <strong>Yield min:</strong> {plant.yieldPerPlantMin}
+                <strong>Yield min:</strong> {plant.yieldPerPlantMin} kg
               </p>
               <p>
-                <strong>Yield max:</strong> {plant.yieldPerPlantMax}
+                <strong>Yield max:</strong> {plant.yieldPerPlantMax} kg
               </p>
             </div>
             <h2 className="mb-2 text-2xl font-semibold">Storage</h2>
