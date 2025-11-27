@@ -20,8 +20,13 @@ export default function MyGarden() {
     <div className="mx-auto mt-24 max-w-6xl px-4 md:px-8">
       <div className="mb-10 flex justify-between">
         <button
-          onClick={() => navigate(-2)}
-          className="rounded-full bg-[#e3ead4] px-8 py-3 text-sm font-semibold text-[#2f2f2f] shadow-md transition hover:bg-[#c8d3b3]"
+
+          className="w-full rounded-full bg-secondary px-8 py-4 text-lg font-semibold text-foreground transition hover:bg-muted"
+          onClick={() => navigate('/manage-my-garden')}
+
+//           onClick={() => navigate(-2)}
+//           className="rounded-full bg-[#e3ead4] px-8 py-3 text-sm font-semibold text-[#2f2f2f] shadow-md transition hover:bg-[#c8d3b3]"
+// >>>>>>> development
         >
           ← Back to list
         </button>
