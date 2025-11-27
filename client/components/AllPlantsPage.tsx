@@ -80,11 +80,11 @@ export default function AllPlantsPage() {
               key={veg.id}
               className="flex flex-col overflow-hidden rounded-2xl bg-[#f5f2ed] shadow-md"
             >
-              <div className="aspect-[3/2] w-full">
+              <div className="w-full">
                 <img
                   src={veg.image}
                   alt={veg.name}
-                  className="h-full w-full object-cover"
+                  className="aspect-[3/2] object-cover"
                 />
               </div>
 
