@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom'
 import ThemedH1 from '../components/theme/ThemedHeader'
 import ThemedText from '../components/theme/ThemedText'
 import { usePlants } from '../hooks/usePlants'
-import LoadingScreen from './LoadingScreen'
 
 interface PlantsLocationState {
   regionName?: string
@@ -44,12 +43,11 @@ export default function AllPlantsPage() {
 
   if (isLoading) {
     return (
-      // <>
-      //   <main className="mx-auto max-w-6xl px-4 py-8 md:px-8">
-      //     <ThemedText>Loading plants…</ThemedText>
-      //   </main>
-      // </>
-      <LoadingScreen />
+      <>
+        <main className="mx-auto max-w-6xl px-4 py-8 md:px-8">
+          <ThemedText>Loading plants…</ThemedText>
+        </main>
+      </>
     )
   }
 
