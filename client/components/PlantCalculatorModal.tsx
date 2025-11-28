@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { VegetableYield } from '../../models/vegetableYield'
 import { calculatePlants } from '../apis/plantCalculator'
 
