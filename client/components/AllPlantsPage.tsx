@@ -81,7 +81,7 @@ export default function AllPlantsPage() {
               key={veg.id}
               className="flex flex-col overflow-hidden rounded-2xl bg-[#f5f2ed] shadow-md"
             >
-              <div className="aspect-[3/2] w-full bg-[url(/public/assets/plant.png)] bg-contain">
+              <div className="aspect-[3/2] w-full bg-[url(/public/assets/plant.png)] bg-contain bg-center bg-no-repeat">
                 <FadeImg
                   src={veg.image}
                   alt={veg.name}
