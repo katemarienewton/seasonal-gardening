@@ -7,7 +7,7 @@ export default function Layout() {
   const [selMonth, setSelMonth] = useState('')
 
   return (
-    <div className="relative min-h-screen bg-[#f5f1ed]">
+    <div className="relative min-h-screen ">
       {/* header */}
       <Header />
 
