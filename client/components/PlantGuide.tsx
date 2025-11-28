@@ -5,6 +5,7 @@ import { Card, CardContent } from './card'
 import { useLocation } from 'react-router-dom'
 import ThemedH1 from './theme/ThemedHeader'
 import ThemedText from './theme/ThemedText'
+import FadeImg from './theme/FadeImg'
 
 export default function PlantGuide() {
   const { id } = useParams()
@@ -94,7 +95,7 @@ export default function PlantGuide() {
           <div className="w-full bg-[#f5f1ed]"></div>
 
           <div className="flex">
-            <img
+            <FadeImg
               src={plant.image}
               alt={plant.name}
               className="w-full rounded-lg object-cover"
@@ -106,7 +107,7 @@ export default function PlantGuide() {
       <Card className="mb-8 overflow-hidden rounded-lg border-0 bg-[#f5f1ed] shadow-none">
         <CardContent className="grid grid-cols-[1fr_16px_1fr] gap-4 p-0">
           <div className="flex flex-shrink-0 md:h-auto md:w-full">
-            <img
+            <FadeImg
               src={plant.image2 || plant.image}
               alt="Growing Conditions"
               className="w-full rounded-lg object-cover"
@@ -194,7 +195,7 @@ export default function PlantGuide() {
           <div className="w-full bg-[#f5f1ed]"></div>
 
           <div className="flex flex-shrink-0 md:h-auto md:w-full">
-            <img
+            <FadeImg
               src={plant.image3 || plant.image}
               alt="Harvest"
               className="w-full rounded-lg object-cover"
