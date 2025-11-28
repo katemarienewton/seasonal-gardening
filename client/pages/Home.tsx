@@ -13,7 +13,7 @@ export default function Home() {
     useOutletContext<AppContext>()
 
   return (
-    <div className="relative flex w-full flex-col lg:flex-row">
+    <div className="relative flex w-full flex-col justify-evenly lg:flex-row">
       <div className="z-0">
         <MonthRegionForm
           selMonth={selMonth}
