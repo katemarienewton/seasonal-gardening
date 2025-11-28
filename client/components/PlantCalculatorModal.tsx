@@ -91,8 +91,8 @@ export default function PlantCalculatorModal({
         {plantsNeeded !== null && (
           <div className="mt-4 rounded-lg border border-[#e3ead4] bg-[#f5f1ed] p-4 text-center">
             <p className="text-gray-800">
-              You need <strong>{plantsNeeded}</strong> {vegetable.name} plants
-              to feed your family for a year.
+              To keep your household stocked with {vegetable.name} for a year,
+              you&apos;d need to grow <strong>{plantsNeeded}</strong> plants.
             </p>
           </div>
         )}
