@@ -8,7 +8,8 @@ export default function Layout() {
   const [selMonth, setSelMonth] = useState<string>('')
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#f5f1ed] text-foreground">
+    // className="flex min-h-screen flex-col bg-[#f5f1ed] text-foreground">
+    <div className="flex min-h-[100dvh] w-full flex-col text-foreground">
       <Header />
       <main className="flex-1 px-8 py-8">
         <Outlet

@@ -13,8 +13,8 @@ export default function Home() {
     useOutletContext<AppContext>()
 
   return (
-    <div className="relative flex w-full flex-col lg:flex-row">
-      <div className="z-10">
+    <div className="relative flex w-full flex-col justify-between lg:flex-row">
+      <div className="z-0">
         <MonthRegionForm
           selMonth={selMonth}
           selRegionId={selRegionId}
@@ -22,8 +22,7 @@ export default function Home() {
           setSelRegionId={setSelRegionId}
         />
       </div>
-      {/* png */}
-      <div className="nz-02.png pointer-events-none fixed bottom-0 right-4 z-0">
+      <div className=" pointer-events-none z-0 ">
         <img
           src="/assets/nz-02.png"
           alt="NZ Map"
