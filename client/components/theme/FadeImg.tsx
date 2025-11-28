@@ -36,7 +36,7 @@ export default function FadeImg({ src, className = '', alt }: Props) {
       src={src}
       alt={alt}
       loading="lazy"
-      className={`transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'} ${className}`}
+      className={`transition-opacity duration-1000 ${loaded ? 'opacity-100' : 'opacity-0'} ${className}`}
     />
   )
 }
