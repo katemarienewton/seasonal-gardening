@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 import ThemedH1 from '../components/theme/ThemedHeader'
 import ThemedText from '../components/theme/ThemedText'
 import { usePlants } from '../hooks/usePlants'
+import FadeImg from './theme/FadeImg'
 
 interface PlantsLocationState {
   regionName?: string
@@ -80,11 +81,11 @@ export default function AllPlantsPage() {
               key={veg.id}
               className="flex flex-col overflow-hidden rounded-2xl bg-[#f5f2ed] shadow-md"
             >
-              <div className="aspect-[3/2] w-full">
-                <img
+              <div className="aspect-[3/2] w-full bg-[url(/public/assets/plant.png)] bg-contain bg-center bg-no-repeat">
+                <FadeImg
                   src={veg.image}
                   alt={veg.name}
-                  className="h-full w-full object-cover"
+                  className="aspect-[3/2] object-cover"
                 />
               </div>
 
@@ -98,7 +99,7 @@ export default function AllPlantsPage() {
 
                 <Link
                   to={`/plant/${veg.id}/guide`}
-                  className="mt-auto text-sm font-semibold text-[#2f2f2f] hover:text-[#B8C2A1]"
+                  state={{ regionName, month: monthFull }}
                 >
                   Click to learn more →
                 </Link>

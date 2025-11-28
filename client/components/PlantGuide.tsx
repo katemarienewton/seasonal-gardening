@@ -2,12 +2,22 @@ import { useQuery } from '@tanstack/react-query'
 import { useParams, useNavigate } from 'react-router-dom'
 import { PlantData } from './../../models/plant'
 import { Card, CardContent } from './card'
+import { useLocation } from 'react-router-dom'
+import ThemedH1 from './theme/ThemedHeader'
+import ThemedText from './theme/ThemedText'
+import FadeImg from './theme/FadeImg'
 import { useState } from 'react'
 import PlantCalculatorModal from './PlantCalculatorModal'
 
 export default function PlantGuide() {
   const { id } = useParams()
   const navigate = useNavigate()
+
+  const location = useLocation()
+  const state = location.state as { regionName?: string; month?: string }
+
+  const regionName = state?.regionName || 'your region'
+  const month = state?.month || 'this month'
   const [isCalculatorOpen, setIsCalculatorOpen] = useState(false)
 
   const {
@@ -41,59 +51,86 @@ export default function PlantGuide() {
   }
 
   return (
-    <div className="mx-auto mt-24 max-w-5xl px-4 md:px-8">
-      <div className="mb-10 flex justify-between">
-        <button
-          onClick={() => navigate(-1)}
-          className="rounded-full bg-[#e3ead4] px-8 py-3 text-sm font-semibold text-[#2f2f2f] shadow-md transition hover:bg-[#c8d3b3]"
-        >
-          ← Back to list
-        </button>
+    <main>
+      <ThemedH1 className="mb-4 text-left">
+        You&apos;ve selected to grow {plant.name} in {regionName} in {month}.
+      </ThemedH1>
+
+      <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
+        <ThemedText className="mb-10 text-left">
+          Here&apos;s some tips and tricks for this growing season:
+        </ThemedText>
 
         <button
           onClick={handleAddToGarden}
-          className="rounded-full bg-[#e3ead4] px-8 py-3 text-sm font-semibold text-[#2f2f2f] shadow-md transition hover:bg-[#c8d3b3]"
+          className="
+      rounded-[40px]
+      bg-[#e8e6e1]
+      px-6
+      py-3
+      text-center
+      text-[clamp(14px,3vw,20px)]
+      font-semibold
+      text-[#2f2f2f]
+      transition
+      hover:bg-[#dcd8ce]
+    "
         >
           + Add to My Garden
         </button>
       </div>
 
-      <Card className="shadow-lg">
-        <CardContent className="flex flex-col items-start gap-10 py-8 md:flex-row">
-          <div className="flex-1">
+      {/* <button
+          onClick={() => navigate(-1)}
+          className="rounded-full bg-[#e3ead4] px-8 py-3 text-sm font-semibold text-[#2f2f2f] shadow-md transition hover:bg-[#c8d3b3]"
+        >
+          ← Back to list
+        </button> */}
+
+      <Card className="mb-8 overflow-hidden rounded-lg border-0 bg-[#f5f1ed] shadow-none">
+        <CardContent className="grid grid-cols-[1fr_16px_1fr] gap-4 p-0">
+          <div className="flex flex-1 flex-col justify-center space-y-6">
             <h1 className="mb-2 text-4xl font-bold">{plant.name}</h1>
             <em className="mb-4 block text-gray-600">{plant.scientificName}</em>
             <p className="leading-relaxed text-gray-800">{plant.description}</p>
           </div>
 
-          <img
-            src={plant.image}
-            alt={plant.name}
-            className="w-full rounded-lg object-cover shadow-md md:w-80"
-          />
+          <div className="w-full bg-[#f5f1ed]"></div>
+
+          <div className="flex">
+            <FadeImg
+              src={plant.image}
+              alt={plant.name}
+              className="w-full rounded-lg object-cover"
+            />
+          </div>
         </CardContent>
       </Card>
 
-      <Card className="shadow-lg">
-        <CardContent className="flex flex-col items-start gap-10 py-8 md:flex-row">
-          <img
-            src={plant.image2 || plant.image}
-            alt="Growing Conditions"
-            className="w-full rounded-lg object-cover p-2 shadow-md md:w-72"
-          />
+      <Card className="mb-8 overflow-hidden rounded-lg border-0 bg-[#f5f1ed] shadow-none">
+        <CardContent className="grid grid-cols-[1fr_16px_1fr] gap-4 p-0">
+          <div className="flex flex-shrink-0 md:h-auto md:w-full">
+            <FadeImg
+              src={plant.image2 || plant.image}
+              alt="Growing Conditions"
+              className="w-full rounded-lg object-cover"
+            />
+          </div>
 
-          <div className="flex-1 space-y-6 pl-4 md:pl-8">
-            <div>
-              <h2 className="mb-2 text-2xl font-semibold">Soil</h2>
-              <p>
-                <strong>Type:</strong> {plant.soilType}
-              </p>
-              <p>
-                <strong>Preparation:</strong> {plant.soilPreparation}
-              </p>
-            </div>
+          <div className="w-full bg-[#f5f1ed]"></div>
 
-            <div>
+          <div className="flex flex-1 flex-col justify-center space-y-6 py-8">
+            <section className="space-y-2">
+              <h2 className="text-2xl font-semibold">Soil</h2>
+              <dl className="leading-relaxed">
+                <strong>Type</strong>
+                <dd>{plant.soilType}</dd>
+                <strong>Preparation</strong>
+                <dd>{plant.soilPreparation}</dd>
+              </dl>
+            </section>
+
+            <section>
               <h2 className="mb-2 text-2xl font-semibold">Spacing</h2>
               <p>
                 <strong>Row spacing:</strong> {plant.spacingRowCm} cm
@@ -101,40 +138,42 @@ export default function PlantGuide() {
               <p>
                 <strong>Plant spacing:</strong> {plant.spacingPlantCm} cm
               </p>
-            </div>
+            </section>
 
-            <div>
-              <div>
-                <h2 className="mb-2 text-2xl font-semibold">Feeding</h2>
-                <p>{plant.feedingSchedule}</p>
-              </div>
-              <h2 className="mb-2 text-2xl font-semibold">Requirements</h2>
-              <p>
-                <strong>Sun:</strong> {plant.requirementsSun}
-              </p>
-              <p>
-                <strong>Water:</strong> {plant.requirementsWater}
-              </p>
-              <p>
-                <strong>Germination:</strong> {plant.requirementsGermination}
-              </p>
-            </div>
+            <section className="space-y-2">
+              <h2 className="text-2xl font-semibold">Requirements</h2>
+              <dl className="leading-relaxed">
+                <strong>Sun</strong>
+                <dd>{plant.requirementsSun}</dd>
+                <strong>Water</strong>
+                <dd>{plant.requirementsWater}</dd>
+                <strong>Germination</strong>
+                <dd>{plant.requirementsGermination}</dd>
+              </dl>
+            </section>
+
+            <section className="space-y-2">
+              <h2 className="text-2xl font-semibold">Feeding</h2>
+              <p className="leading-relaxed">{plant.feedingSchedule}</p>
+            </section>
           </div>
         </CardContent>
       </Card>
 
-      <Card className="shadow-lg">
-        <CardContent className="flex flex-col items-start gap-10 py-8 md:flex-row">
-          <div className="flex-1 space-y-6">
-            <div>
-              <h2 className="mb-2 text-2xl font-semibold">Staking</h2>
+      <Card className="mb-8 overflow-hidden rounded-lg border-0 bg-[#f5f1ed] shadow-none">
+        <CardContent className="grid grid-cols-[1fr_16px_1fr] gap-4 p-0">
+          <div className="flex flex-1 flex-col justify-center space-y-6">
+            <section className="space-y-2">
+              <h2 className="text-2xl font-semibold">Staking</h2>
               <p>
-                <strong>Required?</strong> {plant.stakingRequired}
+                {plant.stakingRequired
+                  ? 'Staking required.'
+                  : 'Staking not required.'}
               </p>
-              <p>{plant.stakingNotes}</p>
-            </div>
+              {plant.stakingNotes && <p>{plant.stakingNotes}</p>}
+            </section>
 
-            <div>
+            <section>
               <h2 className="mb-2 text-2xl font-semibold">Harvest</h2>
               <p>
                 <strong>Min days:</strong> {plant.daysToHarvestMin}
@@ -148,14 +187,23 @@ export default function PlantGuide() {
               <p>
                 <strong>Yield max:</strong> {plant.yieldPerPlantMax} kg
               </p>
-            </div>
+            </section>
+
+            <section className="space-y-2">
+              <h2 className="text-2xl font-semibold">Storage</h2>
+              <p>{plant.storage}</p>
+            </section>
           </div>
 
-          <img
-            src={plant.image3 || plant.image}
-            alt="Harvest"
-            className="w-full rounded-lg object-cover shadow-md md:w-80"
-          />
+          <div className="w-full bg-[#f5f1ed]"></div>
+
+          <div className="flex flex-shrink-0 md:h-auto md:w-full">
+            <FadeImg
+              src={plant.image3 || plant.image}
+              alt="Harvest"
+              className="w-full rounded-lg object-cover"
+            />
+          </div>
         </CardContent>
       </Card>
 
@@ -214,6 +262,6 @@ export default function PlantGuide() {
           )}
         </div>
       </div>
-    </div>
+    </main>
   )
 }
