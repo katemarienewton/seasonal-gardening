@@ -22,6 +22,8 @@ export async function seed(knex) {
       image: '../../public/potato.webp',
       image2: '../../public/potatoes.webp',
       image3: '../../public/potatoes1.webp',
+      consumption_adult_kg: 61,
+      consumption_child_kg: 37,
     },
     {
       id: 2,
@@ -42,6 +44,8 @@ export async function seed(knex) {
       image: '../../public/onion.webp',
       image2: '../../public/onions.webp',
       image3: '../../public/onion1.webp',
+      consumption_adult_kg: 9,
+      consumption_child_kg: 5,
     },
     {
       id: 3,
@@ -62,6 +66,8 @@ export async function seed(knex) {
       image: '../../public/pumpkin.webp',
       image2: '../../public/pumpkinplant.webp',
       image3: '../../public/pumpkinplant1.webp',
+      consumption_adult_kg: 7,
+      consumption_child_kg: 4,
     },
     {
       id: 4,
@@ -81,6 +87,8 @@ export async function seed(knex) {
       image: '../../public/broccoli.webp',
       image2: '../../public/broccoli3.webp',
       image3: '../../public/broccoli2.webp',
+      consumption_adult_kg: 7.5,
+      consumption_child_kg: 4.5,
     },
     {
       id: 5,
@@ -100,6 +108,8 @@ export async function seed(knex) {
       image: '../../public/cauliflower.webp',
       image2: '../../public/cauliflower1.webp',
       image3: '../../public/cauliflower2.webp',
+      consumption_adult_kg: 5.5,
+      consumption_child_kg: 3.3,
     },
     {
       id: 6,
@@ -119,6 +129,8 @@ export async function seed(knex) {
       image: '../../public/cabbage.webp',
       image2: '../../public/cabbage3.webp',
       image3: '../../public/cabbage1.webp',
+      consumption_adult_kg: 6,
+      consumption_child_kg: 4,
     },
     {
       id: 7,
@@ -138,6 +150,8 @@ export async function seed(knex) {
       image: '../../public/lettuce.webp',
       image2: '../../public/lettuce1.webp',
       image3: '../../public/lettuce2.webp',
+      consumption_adult_kg: 5,
+      consumption_child_kg: 3,
     },
     {
       id: 8,
@@ -157,6 +171,8 @@ export async function seed(knex) {
       image: '../../public/spinach.webp',
       image2: '../../public/spinach1.webp',
       image3: '../../public/spinach2.webp',
+      consumption_adult_kg: 5,
+      consumption_child_kg: 3,
     },
     {
       id: 9,
@@ -176,6 +192,8 @@ export async function seed(knex) {
       image: '../../public/silverbeet.webp',
       image2: '../../public/silverbeet1.webp',
       image3: '../../public/silverbeet3.webp',
+      consumption_adult_kg: 4,
+      consumption_child_kg: 2.5,
     },
     {
       id: 10,
@@ -195,6 +213,8 @@ export async function seed(knex) {
       image: '../../public/kale.webp',
       image2: '../../public/kale1.webp',
       image3: '../../public/kale3.webp',
+      consumption_adult_kg: 3,
+      consumption_child_kg: 2,
     },
     {
       id: 11,
@@ -214,6 +234,8 @@ export async function seed(knex) {
       image: '../../public/sweet-pea.webp',
       image2: '../../public/peas1.webp',
       image3: '../../public/peas2.webp',
+      consumption_adult_kg: 3,
+      consumption_child_kg: 1.8,
     },
     {
       id: 12,
@@ -233,6 +255,8 @@ export async function seed(knex) {
       image: '../../public/green-beans.webp',
       image2: '../../public/greenbean1.webp',
       image3: '../../public/greenbean2.webp',
+      consumption_adult_kg: 4,
+      consumption_child_kg: 2.4,
     },
     {
       id: 13,
@@ -252,6 +276,8 @@ export async function seed(knex) {
       image: '../../public/carrots.webp',
       image2: '../../public/carrots3.webp',
       image3: '../../public/carrots4.webp',
+      consumption_adult_kg: 18,
+      consumption_child_kg: 11,
     },
     {
       id: 14,
@@ -271,6 +297,8 @@ export async function seed(knex) {
       image: '../../public/beetroot.webp',
       image2: '../../public/beetroot1.webp',
       image3: '../../public/beetroot3.webp',
+      consumption_adult_kg: 3,
+      consumption_child_kg: 1.8,
     },
     {
       id: 15,
@@ -290,6 +318,8 @@ export async function seed(knex) {
       image: '../../public/parsnip-plant.webp',
       image2: '../../public/parsnip1.webp',
       image3: '../../public/parsnip2.webp',
+      consumption_adult_kg: 3,
+      consumption_child_kg: 1.8,
     },
     {
       id: 16,
@@ -309,6 +339,8 @@ export async function seed(knex) {
       image: '../../public/kumera.webp',
       image2: '../../public/kumera1.webp',
       image3: '../../public/kumera2.webp',
+      consumption_adult_kg: 12,
+      consumption_child_kg: 6,
     },
     {
       id: 17,
@@ -328,6 +360,8 @@ export async function seed(knex) {
       image: '../../public/tomato.webp',
       image2: '../../public/tomatoes1.webp',
       image3: '../../public/tomatoplant2.webp',
+      consumption_adult_kg: 15,
+      consumption_child_kg: 9,
     },
     {
       id: 18,
@@ -347,6 +381,8 @@ export async function seed(knex) {
       image: '../../public/bell-pepper.webp',
       image2: '../../public/bellpepper.webp',
       image3: '../../public/bellpepper1.webp',
+      consumption_adult_kg: 5,
+      consumption_child_kg: 3,
     },
     {
       id: 19,
@@ -366,6 +402,8 @@ export async function seed(knex) {
       image: '../../public/cucumber.webp',
       image2: '../../public/cucumber1.webp',
       image3: '../../public/cucumber2.webp',
+      consumption_adult_kg: 3.5,
+      consumption_child_kg: 2,
     },
     {
       id: 20,
@@ -385,6 +423,8 @@ export async function seed(knex) {
       image: '../../public/turnip.webp',
       image2: '../../public/turnip1.webp',
       image3: '../../public/turnip2.webp',
+      consumption_adult_kg: 3.5,
+      consumption_child_kg: 2,
     },
     {
       id: 21,
@@ -406,6 +446,8 @@ export async function seed(knex) {
       image: '../../public/apple.webp',
       image2: '../../public/apple1.webp',
       image3: '../../public/apple2.webp',
+      consumption_adult_kg: 26,
+      consumption_child_kg: 18,
     },
     {
       id: 22,
@@ -427,6 +469,8 @@ export async function seed(knex) {
       image: '../../public/avocado.webp',
       image2: '../../public/avocado1.webp',
       image3: '../../public/avocado2.webp',
+      consumption_adult_kg: 3.5,
+      consumption_child_kg: 2.5,
     },
     {
       id: 23,
@@ -448,6 +492,8 @@ export async function seed(knex) {
       image: '../../public/basil.webp',
       image2: '../../public/basil1.webp',
       image3: '../../public/basil2.webp',
+      consumption_adult_kg: 0.3,
+      consumption_child_kg: 0.18,
     },
     {
       id: 24,
@@ -469,6 +515,8 @@ export async function seed(knex) {
       image: '../../public/blueberry.webp',
       image2: '../../public/blueberry1.webp',
       image3: '../../public/blueberry2.webp',
+      consumption_adult_kg: 1.2,
+      consumption_child_kg: 0.84,
     },
     {
       id: 25,
@@ -490,6 +538,8 @@ export async function seed(knex) {
       image: '../../public/chives1.webp',
       image2: '../../public/chives.webp',
       image3: '../../public/chives2.webp',
+      consumption_adult_kg: 0.25,
+      consumption_child_kg: 0.15,
     },
     {
       id: 26,
@@ -511,6 +561,8 @@ export async function seed(knex) {
       image: '../../public/coriander.webp',
       image2: '../../public/coriander1.webp',
       image3: '../../public/coriander2.webp',
+      consumption_adult_kg: 0.35,
+      consumption_child_kg: 0.21,
     },
     {
       id: 27,
@@ -532,6 +584,8 @@ export async function seed(knex) {
       image: '../../public/mint.webp',
       image2: '../../public/mint1.webp',
       image3: '../../public/mint2.webp',
+      consumption_adult_kg: 0.4,
+      consumption_child_kg: 0.24,
     },
     {
       id: 28,
@@ -553,6 +607,8 @@ export async function seed(knex) {
       image: '../../public/parsley.webp',
       image2: '../../public/parsley1.webp',
       image3: '../../public/parsley2.webp',
+      consumption_adult_kg: 0.5,
+      consumption_child_kg: 0.3,
     },
     {
       id: 29,
@@ -573,6 +629,8 @@ export async function seed(knex) {
       image: '../../public/sage.webp',
       image2: '../../public/sage1.webp',
       image3: '../../public/sage2.webp',
+      consumption_adult_kg: 0.2,
+      consumption_child_kg: 0.12,
     },
     {
       id: 30,
@@ -593,6 +651,8 @@ export async function seed(knex) {
       image: '../../public/strawberry.webp',
       image2: '../../public/strawberry1.webp',
       image3: '../../public/strawberry2.webp',
+      consumption_adult_kg: 2,
+      consumption_child_kg: 1.4,
     },
     {
       id: 31,
@@ -613,6 +673,8 @@ export async function seed(knex) {
       image: '../../public/watermelon.webp',
       image2: '../../public/watermelon1.webp',
       image3: '../../public/watermelon2.webp',
+      consumption_adult_kg: 6,
+      consumption_child_kg: 4.2,
     },
     {
       id: 32,
@@ -633,6 +695,8 @@ export async function seed(knex) {
       image: '../../public/feijoa.webp',
       image2: '../../public/feijoa1.webp',
       image3: '../../public/feijoa2.webp',
+      consumption_adult_kg: 3,
+      consumption_child_kg: 2.1,
     },
     {
       id: 33,
@@ -653,6 +717,8 @@ export async function seed(knex) {
       image: '../../public/garlic.webp',
       image2: '../../public/garlic1.webp',
       image3: '../../public/garlic2.webp',
+      consumption_adult_kg: 1,
+      consumption_child_kg: 0.6,
     },
     {
       id: 34,
@@ -674,6 +740,8 @@ export async function seed(knex) {
       image: '../../public/lemon.webp',
       image2: '../../public/lemon1.webp',
       image3: '../../public/lemon2.webp',
+      consumption_adult_kg: 3.2,
+      consumption_child_kg: 2.24,
     },
     {
       id: 35,
@@ -694,6 +762,8 @@ export async function seed(knex) {
       image: '../../public/orange.webp',
       image2: '../../public/orange1.webp',
       image3: '../../public/orange2.webp',
+      consumption_adult_kg: 6,
+      consumption_child_kg: 4.2,
     },
     {
       id: 36,
@@ -715,6 +785,8 @@ export async function seed(knex) {
       image: '../../public/peaches.webp',
       image2: '../../public/peaches1.webp',
       image3: '../../public/peaches2.webp',
+      consumption_adult_kg: 2.5,
+      consumption_child_kg: 1.75,
     },
   ])
 }

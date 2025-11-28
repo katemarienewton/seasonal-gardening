@@ -2,10 +2,13 @@ import { useQuery } from '@tanstack/react-query'
 import { useParams, useNavigate } from 'react-router-dom'
 import { PlantData } from './../../models/plant'
 import { Card, CardContent } from './card'
+import { useState } from 'react'
+import PlantCalculatorModal from './PlantCalculatorModal'
 
 export default function PlantGuide() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const [isCalculatorOpen, setIsCalculatorOpen] = useState(false)
 
   const {
     data: plant,
@@ -101,6 +104,10 @@ export default function PlantGuide() {
             </div>
 
             <div>
+              <div>
+                <h2 className="mb-2 text-2xl font-semibold">Feeding</h2>
+                <p>{plant.feedingSchedule}</p>
+              </div>
               <h2 className="mb-2 text-2xl font-semibold">Requirements</h2>
               <p>
                 <strong>Sun:</strong> {plant.requirementsSun}
@@ -111,11 +118,6 @@ export default function PlantGuide() {
               <p>
                 <strong>Germination:</strong> {plant.requirementsGermination}
               </p>
-            </div>
-
-            <div>
-              <h2 className="mb-2 text-2xl font-semibold">Feeding</h2>
-              <p>{plant.feedingSchedule}</p>
             </div>
           </div>
         </CardContent>
@@ -147,8 +149,6 @@ export default function PlantGuide() {
                 <strong>Yield max:</strong> {plant.yieldPerPlantMax} kg
               </p>
             </div>
-            <h2 className="mb-2 text-2xl font-semibold">Storage</h2>
-            <p>{plant.storage}</p>
           </div>
 
           <img
@@ -158,6 +158,62 @@ export default function PlantGuide() {
           />
         </CardContent>
       </Card>
+
+      <Card className="shadow-lg">
+        <CardContent className="flex flex-col items-start gap-10 py-8 md:flex-row">
+          <img
+            src={plant.image2 || plant.image}
+            alt="Growing Conditions"
+            className="w-full rounded-lg object-cover p-2 shadow-md md:w-72"
+          />
+
+          <div className="flex-1 space-y-6 pl-4 md:pl-8">
+            <div>
+              <h2 className="mb-2 text-2xl font-semibold">Storage</h2>
+              <p>
+                <strong>Short term: </strong>
+                {plant.storage}
+              </p>
+
+              <p>
+                <strong>Long term: </strong>
+                {plant.preservation}
+              </p>
+              <p>
+                <strong>Recipe ideas: </strong>
+                {plant.recipeIdeas}
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* plant Calculator */}
+
+      <div className="mt-8 flex justify-center">
+        <div>
+          <button
+            onClick={() => setIsCalculatorOpen(true)}
+            className="rounded-full bg-[#e3ead4] px-8 py-3 text-sm font-semibold text-[#2f2f2f] shadow-md transition hover:bg-[#c8d3b3]"
+          >
+            Open Plant Calculator
+          </button>
+          {plant && (
+            <PlantCalculatorModal
+              isOpen={isCalculatorOpen}
+              onClose={() => setIsCalculatorOpen(false)}
+              vegetable={{
+                id: plant.id,
+                name: plant.name,
+                yieldPerPlantMin: plant.yieldPerPlantMin,
+                yieldPerPlantMax: plant.yieldPerPlantMax,
+                consumptionAdultKg: plant.consumptionAdultKg,
+                consumptionChildKg: plant.consumptionChildKg,
+              }}
+            />
+          )}
+        </div>
+      </div>
     </div>
   )
 }
