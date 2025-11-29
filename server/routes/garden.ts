@@ -38,6 +38,13 @@ router.post('/', checkJwt, async (req: JwtRequest, res) => {
   const user = await db('users').where({ auth0_id: auth0Id }).first()
   if (!user) return res.status(404).json({ error: 'User not found' })
 
+  const existing = await db('user_garden')
+    .where({ user_id: user.id, plant_id: plant_id })
+    .first()
+  if (existing) {
+    return res.status(400).json({ error: 'Plant already in your garden' })
+  }
+
   await db('user_garden').insert({
     user_id: user.id,
     plant_id: plant_id,
