@@ -1,4 +1,5 @@
 // Corrected Seed File
+
 export async function seed(knex) {
   // Deletes ALL existing entries
   await knex('users').del()

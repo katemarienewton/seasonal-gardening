@@ -3,6 +3,7 @@ import db from '../db/connection.js'
 import checkJwt, { JwtRequest } from '../auth0.js'
 
 const router = express.Router()
+console.log('users.ts has loaded')
 
 // GET /api/v1/users/me
 // - Validates JWT
@@ -11,6 +12,8 @@ const router = express.Router()
 router.get('/me', checkJwt, async (req: JwtRequest, res) => {
   try {
     const auth0Id = req.auth?.sub
+    console.log('HIT GET /users/me')
+
     if (!auth0Id) return res.status(401).json({ error: 'Unauthorized' })
 
     let user = await db('users').where({ id: auth0Id }).first()
