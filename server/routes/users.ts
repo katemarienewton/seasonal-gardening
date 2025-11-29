@@ -32,23 +32,16 @@ router.get('/me', checkJwt, async (req: JwtRequest, res) => {
 // PATCH /api/v1/users/me
 // Update only backend fields (NOT Auth0)
 router.patch('/me', checkJwt, async (req: JwtRequest, res) => {
-  try {
-    const auth0Id = req.auth?.sub
-    if (!auth0Id) return res.status(401).json({ error: 'Unauthorized' })
+  const auth0Id = req.auth?.sub
+  const { display_name, region_id } = req.body
 
-    const { display_name, region_id } = req.body
+  await db('users')
+    .where({ auth0_id: auth0Id })
+    .update({ display_name, region_id })
 
-    await db('users').where({ id: auth0Id }).update({
-      display_name,
-      region_id,
-    })
+  const updated = await db('users').where({ auth0_id: auth0Id }).first()
 
-    const updated = await db('users').where({ id: auth0Id }).first()
-    res.json(updated)
-  } catch (err) {
-    console.error(err)
-    res.status(500).json({ error: 'Failed to update user' })
-  }
+  res.json(updated)
 })
 
 export default router
