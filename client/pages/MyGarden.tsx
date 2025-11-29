@@ -47,7 +47,7 @@ export default function MyGarden() {
           //           className="rounded-full bg-[#e3ead4] px-8 py-3 text-sm font-semibold text-[#2f2f2f] shadow-md transition hover:bg-[#c8d3b3]"
           // >>>>>>> development
         >
-          ← Back to list
+          ← Back to List
         </button>
 
         <button
@@ -83,7 +83,7 @@ export default function MyGarden() {
           {plants.map((plant) => (
             <article
               key={plant.id}
-              className="flex flex-col overflow-hidden rounded-2xl bg-[#f5f2ed] shadow-md"
+              className="flex flex-col overflow-hidden rounded-2xl bg-white shadow-md"
             >
               <div className="aspect-[3/2] w-full bg-[url(/public/assets/plant.png)] bg-contain bg-center bg-no-repeat">
                 <FadeImg

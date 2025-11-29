@@ -79,7 +79,7 @@ export default function AllPlantsPage() {
           {plants.map((veg) => (
             <article
               key={veg.id}
-              className="flex flex-col overflow-hidden rounded-2xl bg-[#f5f2ed] shadow-md"
+              className="flex flex-col overflow-hidden rounded-2xl bg-white shadow-md"
             >
               <div className="aspect-[3/2] w-full bg-[url(/public/assets/plant.png)] bg-contain bg-center bg-no-repeat">
                 <FadeImg
