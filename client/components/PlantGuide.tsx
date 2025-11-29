@@ -6,6 +6,8 @@ import { useLocation } from 'react-router-dom'
 import ThemedH1 from './theme/ThemedHeader'
 import ThemedText from './theme/ThemedText'
 import FadeImg from './theme/FadeImg'
+import { useState } from 'react'
+import PlantCalculatorModal from './PlantCalculatorModal'
 
 export default function PlantGuide() {
   const { id } = useParams()
@@ -16,6 +18,7 @@ export default function PlantGuide() {
 
   const regionName = state?.regionName || 'your region'
   const month = state?.month || 'this month'
+  const [isCalculatorOpen, setIsCalculatorOpen] = useState(false)
 
   const {
     data: plant,
@@ -77,12 +80,12 @@ export default function PlantGuide() {
         </button>
       </div>
 
-      {/* <button
-          onClick={() => navigate(-1)}
-          className="rounded-full bg-[#e3ead4] px-8 py-3 text-sm font-semibold text-[#2f2f2f] shadow-md transition hover:bg-[#c8d3b3]"
-        >
-          ← Back to list
-        </button> */}
+      <button
+        onClick={() => navigate(-1)}
+        className="rounded-full bg-[#e3ead4] px-8 py-3 text-sm font-semibold text-[#2f2f2f] shadow-md transition hover:bg-[#c8d3b3]"
+      >
+        ← Back to list
+      </button>
 
       <Card className="mb-8 overflow-hidden rounded-lg border-0 bg-[#f5f1ed] shadow-none">
         <CardContent className="grid grid-cols-[1fr_16px_1fr] gap-4 p-0">
@@ -185,11 +188,45 @@ export default function PlantGuide() {
                 <strong>Yield max:</strong> {plant.yieldPerPlantMax} kg
               </p>
             </section>
-
             <section className="space-y-2">
+              <h2 className="text-2xl font-semibold">
+                Calculate the right number of plants for your household.
+              </h2>
+              <dl className="leading-relaxed">
+                <dd>
+                  Our tool helps estimate how many plants you should grow to
+                  meet your household&apos;s yearly needs for this crop.
+                </dd>
+              </dl>
+              <div>
+                <div>
+                  <button
+                    onClick={() => setIsCalculatorOpen(true)}
+                    className="mt-4 rounded-full bg-[#e3ead4] px-8 py-3 text-sm font-semibold text-[#2f2f2f] shadow-md transition hover:bg-[#c8d3b3]"
+                  >
+                    Open Plant Calculator
+                  </button>
+                  {plant && (
+                    <PlantCalculatorModal
+                      isOpen={isCalculatorOpen}
+                      onClose={() => setIsCalculatorOpen(false)}
+                      vegetable={{
+                        id: plant.id,
+                        name: plant.name,
+                        yieldPerPlantMin: plant.yieldPerPlantMin,
+                        yieldPerPlantMax: plant.yieldPerPlantMax,
+                        consumptionAdultKg: plant.consumptionAdultKg,
+                        consumptionChildKg: plant.consumptionChildKg,
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
+            </section>
+            {/* <section className="space-y-2">
               <h2 className="text-2xl font-semibold">Storage</h2>
               <p>{plant.storage}</p>
-            </section>
+            </section> */}
           </div>
 
           <div className="w-full bg-[#f5f1ed]"></div>
@@ -203,6 +240,59 @@ export default function PlantGuide() {
           </div>
         </CardContent>
       </Card>
+
+      <Card className="mb-8 overflow-hidden rounded-lg border-0 bg-[#f5f1ed] shadow-none">
+        <CardContent className="grid grid-cols-[1fr_16px_1fr] gap-4 p-0">
+          <div className="flex flex-shrink-0 md:h-auto md:w-full">
+            <FadeImg
+              src={plant.image2 || plant.image}
+              alt="Growing Conditions"
+              className="w-full rounded-lg object-cover"
+            />
+          </div>
+          <div className="w-full bg-[#f5f1ed]"></div>
+          <div className="flex flex-1 flex-col justify-center space-y-6 py-8">
+            <section className="space-y-2">
+              <h2 className="text-2xl font-semibold">Storage</h2>
+              <dl className="leading-relaxed">
+                <strong>Short term: </strong>
+                <dd>{plant.storage}</dd>
+                <strong>Long term: </strong>
+                <dd>{plant.preservation}</dd>
+                <strong>Recipe ideas: </strong>
+                <dd>{plant.recipeIdeas}</dd>
+              </dl>
+            </section>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* plant Calculator */}
+
+      {/* <div className="mt-8 flex justify-center">
+        <div>
+          <button
+            onClick={() => setIsCalculatorOpen(true)}
+            className="rounded-full bg-[#e3ead4] px-8 py-3 text-sm font-semibold text-[#2f2f2f] shadow-md transition hover:bg-[#c8d3b3]"
+          >
+            Open Plant Calculator
+          </button>
+          {plant && (
+            <PlantCalculatorModal
+              isOpen={isCalculatorOpen}
+              onClose={() => setIsCalculatorOpen(false)}
+              vegetable={{
+                id: plant.id,
+                name: plant.name,
+                yieldPerPlantMin: plant.yieldPerPlantMin,
+                yieldPerPlantMax: plant.yieldPerPlantMax,
+                consumptionAdultKg: plant.consumptionAdultKg,
+                consumptionChildKg: plant.consumptionChildKg,
+              }}
+            />
+          )}
+        </div>
+      </div> */}
     </main>
   )
 }

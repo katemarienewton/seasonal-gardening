@@ -12,6 +12,8 @@ export interface PlantData {
   daysToHarvestMax: number
   yieldPerPlantMin: number
   yieldPerPlantMax: number
+  consumptionChildKg: number
+  consumptionAdultKg: number
   storage: string
   image: string
   image2: string
@@ -26,4 +28,6 @@ export interface PlantData {
   feedingSchedule: string
   stakingRequired: boolean
   stakingNotes: string
+  preservation: string
+  recipeIdeas: string
 }
