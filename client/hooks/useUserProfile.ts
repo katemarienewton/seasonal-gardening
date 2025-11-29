@@ -39,3 +39,20 @@ export function useUpdateUserProfile() {
     },
   })
 }
+
+export function useRemoveFromGarden() {
+  const authFetch = useAuthFetch()
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (plantId: number) => {
+      const res = await authFetch(`/api/v1/garden/${plantId}`, {
+        method: 'DELETE',
+      })
+      return res.json()
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['user-garden'] })
+    },
+  })
+}
