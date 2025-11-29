@@ -188,10 +188,16 @@ export default function PlantGuide() {
             <section>
               <h2 className="mb-2 text-2xl font-semibold">Harvest</h2>
               <p>
-                <strong>Min days:</strong> {plant.daysToHarvestMin}
+                <strong>Minimum time till harvest:</strong>{' '}
+                {plant.daysToHarvestMin < 365
+                  ? `${plant.daysToHarvestMin} days`
+                  : `${plant.daysToHarvestMin / 365} years`}
               </p>
               <p>
-                <strong>Max days:</strong> {plant.daysToHarvestMax}
+                <strong>Maximum time till harvest:</strong>{' '}
+                {plant.daysToHarvestMax < 365
+                  ? `${plant.daysToHarvestMax} days`
+                  : `${plant.daysToHarvestMax / 365} years`}
               </p>
               <p>
                 <strong>Yield min:</strong> {plant.yieldPerPlantMin} kg
