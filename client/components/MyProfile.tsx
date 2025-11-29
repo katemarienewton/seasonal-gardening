@@ -1,67 +1,80 @@
-import { useAuth0 } from '@auth0/auth0-react'
 import { useNavigate } from 'react-router'
+import { useAuth0 } from '@auth0/auth0-react'
 import { useUserProfile } from '../hooks/useUserProfile'
 
-import ThemedH1 from './theme/ThemedHeader'
-import ThemedText from './theme/ThemedText'
-import Spacer from './theme/Spacer'
+import ThemedH1 from '../components/theme/ThemedHeader'
+import ThemedText from '../components/theme/ThemedText'
+import Spacer from '../components/theme/Spacer'
 
 export default function MyProfile() {
   const navigate = useNavigate()
-  const { user, logout } = useAuth0()
+  const { user: authUser, logout } = useAuth0()
 
+  // Backend profile (display_name, region_id, isNew flag)
   const profileQuery = useUserProfile()
 
-  if (profileQuery.isLoading) return <p>Loading your profile...</p>
-  if (profileQuery.isError) return <p>Error loading your profile.</p>
+  if (profileQuery.isLoading) {
+    return <p>Loading your profile...</p>
+  }
+
+  if (profileQuery.isError || !profileQuery.data) {
+    return <p>Error loading your profile.</p>
+  }
 
   const profile = profileQuery.data
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-12">
-      {/* Page Title */}
+      {/* PAGE TITLE */}
       <ThemedH1 className="mb-4 text-left">My Account</ThemedH1>
       <ThemedText className="mb-8 text-left">
         Manage your account details below.
       </ThemedText>
 
-      {/* Profile Card */}
+      {/* PROFILE CARD */}
       <section className="rounded-2xl bg-[#f5f2ed] p-8 shadow-md">
+        {/* TOP SECTION (Auth0 avatar + name) */}
+        <div className="mb-8 flex items-center gap-6">
+          <img
+            src={authUser?.picture}
+            alt="User avatar"
+            className="h-20 w-20 rounded-full shadow"
+          />
+
+          <div className="flex flex-col">
+            <ThemedText className="text-sm uppercase text-[#6b6b6b]">
+              Logged in as:
+            </ThemedText>
+            <ThemedH1 className="text-xl text-[#2f2f2f]">
+              {authUser?.email ?? 'Unknown Email'}
+            </ThemedH1>
+          </div>
+        </div>
+
+        {/* BACKEND PROFILE INFO */}
         <div className="flex flex-col gap-6">
-          {/* Display Name (from backend) */}
           <div>
             <ThemedText className="text-sm uppercase text-[#6b6b6b]">
               Display Name
             </ThemedText>
             <ThemedH1 className="text-xl text-[#2f2f2f]">
-              {profile?.display_name || 'Not set'}
+              {profile.display_name || 'Not set'}
             </ThemedH1>
           </div>
 
-          {/* Region (from backend) */}
           <div>
             <ThemedText className="text-sm uppercase text-[#6b6b6b]">
               Region
             </ThemedText>
             <ThemedH1 className="text-xl text-[#2f2f2f]">
-              {profile?.region_id ?? 'Not selected'}
-            </ThemedH1>
-          </div>
-
-          {/* Email (from Auth0) */}
-          <div>
-            <ThemedText className="text-sm uppercase text-[#6b6b6b]">
-              Email
-            </ThemedText>
-            <ThemedH1 className="text-xl text-[#2f2f2f]">
-              {user?.email || 'Email unavailable'}
+              {profile.region_id ?? 'Not selected'}
             </ThemedH1>
           </div>
         </div>
 
         <Spacer className="h-8" />
 
-        {/* Actions */}
+        {/* ACTION BUTTONS */}
         <div className="flex flex-col gap-4">
           <button
             className="w-full rounded-full bg-[#e3ead4] px-6 py-3 font-semibold text-[#2f2f2f] transition hover:bg-[#b9c3a8]"
@@ -74,7 +87,7 @@ export default function MyProfile() {
             className="w-full rounded-full bg-[#e3ead4] px-6 py-3 font-semibold text-[#2f2f2f] transition hover:bg-[#b9c3a8]"
             onClick={() => navigate('/my-garden')}
           >
-            Go to My Garden
+            My Garden
           </button>
 
           <button
@@ -83,7 +96,7 @@ export default function MyProfile() {
               logout({ logoutParams: { returnTo: window.location.origin } })
             }
           >
-            Log out
+            Log Out
           </button>
         </div>
       </section>
