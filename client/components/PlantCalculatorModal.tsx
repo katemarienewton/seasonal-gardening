@@ -57,7 +57,7 @@ export default function PlantCalculatorModal({
             />
           </div>
 
-          <div>
+          <div className="mb-3">
             <label
               htmlFor="children"
               className="mb-1 block font-semibold text-gray-700"
@@ -73,17 +73,17 @@ export default function PlantCalculatorModal({
             />
           </div>
         </div>
-        <div className="mb-4 flex gap-4">
+        <div className="mb-1 flex gap-4">
           <button
             onClick={handleCalculate}
             disabled={loading}
-            className="flex-1 rounded-full bg-[#e3ead4] px-8 py-3 font-semibold text-[#2f2f2f] shadow-md transition hover:bg-[#c8d3b3] "
+            className="flex-1 rounded-full bg-[#e3ead4] px-8 py-3 font-semibold text-[#2f2f2f] transition hover:bg-[#c8d3b3] "
           >
             {loading ? 'Calculating...' : 'Calculate'}
           </button>
           <button
             onClick={onClose}
-            className="flex-1 rounded-full bg-[#e3ead4] px-8 py-3 font-semibold text-[#2f2f2f] shadow-md transition hover:bg-[#c8d3b3]"
+            className="flex-1 rounded-full bg-[#e3ead4] px-8 py-3 font-semibold text-[#2f2f2f] transition hover:bg-[#c8d3b3]"
           >
             Close
           </button>

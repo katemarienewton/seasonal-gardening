@@ -5,6 +5,9 @@ import FormRow from './theme/FormRow'
 import InputSelect from './theme/InputSelect'
 import Button from './theme/Button'
 
+import ThemedH1 from './theme/ThemedHeader'
+import ThemedText from './theme/ThemedText'
+
 const months = [
   { January: 'Jan' },
   { February: 'Feb' },
@@ -66,12 +69,12 @@ export default function MonthRegionForm({
   return (
     <div className="flex w-full flex-col gap-6">
       <div className="w-full max-w-2xl">
-        <h2 className="mb-4 text-2xl font-semibold md:text-3xl lg:text-4xl">
+        <ThemedH1 className="mb-4 text-left">
           Choose your month and region to grow.
-        </h2>
-        <p className="text-lg text-[#8c8c8c]">
+        </ThemedH1>
+        <ThemedText className="mb-8 text-left">
           A guide to seasonal gardening in New Zealand.
-        </p>
+        </ThemedText>
       </div>
 
       <div className="flex w-full max-w-lg flex-col gap-6">
