@@ -1,4 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useAuthFetch } from '../components/lib/authFetch'
+import { UserProfile, UserProfileUpdate } from '../../models/user
 
 export function useUserProfile(options?: { enabled?: boolean }) {
   const authFetch = useAuthFetch()

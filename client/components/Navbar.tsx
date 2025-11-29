@@ -1,13 +1,14 @@
 import { NavLink, useNavigate } from 'react-router'
-import { useTestAuth } from '../hooks/useTestAuth'
+import { useAuth0 } from '@auth0/auth0-react'
 
 const navItemClass =
   'text-base rounded-[40px] px-6 py-3 text-center text-[clamp(14px,3vw,20px)] font-semibold transition-colors duration-300'
 
 export default function Navbar() {
-  const { isAuthenticated, loginWithRedirect, logout } = useTestAuth()
+  const { isAuthenticated, loginWithRedirect, logout } = useAuth0()
   const navigate = useNavigate()
 
+  // My Garden requires login
   const handleMyGarden = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (!isAuthenticated) {
       e.preventDefault()
@@ -17,14 +18,15 @@ export default function Navbar() {
     }
   }
 
+  // Auth0 logout
   const handleLogout = () => {
-    logout()
-    navigate('/')
+    logout({ logoutParams: { returnTo: window.location.origin } })
   }
 
   return (
     <nav>
       <div className="flex gap-1 rounded-full bg-[#e8e6e1] px-2 py-0.5">
+        {/* HOME */}
         <NavLink
           to="/"
           className={({ isActive }) =>
@@ -34,6 +36,7 @@ export default function Navbar() {
           Home
         </NavLink>
 
+        {/* MY GARDEN (Protected) */}
         <NavLink
           to="/my-garden"
           onClick={handleMyGarden}
@@ -44,21 +47,19 @@ export default function Navbar() {
           My Garden
         </NavLink>
 
+        {/* LOGIN / LOGOUT */}
         {!isAuthenticated ? (
-          <NavLink
-            to="/login"
-            onClick={(e) => {
-              e.preventDefault()
-              loginWithRedirect()
-            }}
-            className={({ isActive }) =>
-              `${navItemClass} ${isActive ? 'text-[#6a8a62]' : 'text-[#2f2f2f]'}`
-            }
+          <button
+            className={`${navItemClass} text-[#2f2f2f]`}
+            onClick={() => loginWithRedirect()}
           >
             Login
-          </NavLink>
+          </button>
         ) : (
-          <button onClick={handleLogout} className={navItemClass}>
+          <button
+            className={`${navItemClass} text-[#2f2f2f]`}
+            onClick={handleLogout}
+          >
             Logout
           </button>
         )}
