@@ -3,45 +3,57 @@ import db from '../db/connection.js'
 import checkJwt, { JwtRequest } from '../auth0.js'
 
 const router = express.Router()
-console.log('users.ts has loaded')
 
-// GET /api/v1/users/me
-// - Validates JWT
-// - If user exists → return user, isNew: false
-// - If not → create user, return isNew: true
+// GET /users/me — fetch or create user
 router.get('/me', checkJwt, async (req: JwtRequest, res) => {
   const auth0Id = req.auth?.sub
-  if (!auth0Id) return res.status(401).json({ error: 'Unauthorized' })
 
-  // look up user by auth0_id (correct)
-  let user = await db('users').where({ auth0_id: auth0Id }).first()
-
-  // create user if not found
-  if (!user) {
-    user = await db('users')
-      .insert({ auth0_id: auth0Id })
-      .returning('*')
-      .then((rows) => rows[0])
-
-    return res.json({ ...user, isNew: true })
+  if (!auth0Id) {
+    return res.status(401).json({ error: 'Unauthorized' })
   }
 
-  res.json({ ...user, isNew: false })
+  // Look up by auth0_id (NOT by id)
+  const user = await db('users').where({ auth0_id: auth0Id }).first()
+
+  // If user doesn't exist → create it
+  if (!user) {
+    const created = await db('users')
+      .insert({
+        auth0_id: auth0Id,
+        display_name: null,
+        region_id: null,
+      })
+      .returning('*')
+
+    return res.json({
+      ...created[0],
+      isNew: true,
+    })
+  }
+
+  return res.json({
+    ...user,
+    isNew: false,
+  })
 })
 
-// PATCH /api/v1/users/me
-// Update only backend fields (NOT Auth0)
+// PATCH /users/me — update user profile
 router.patch('/me', checkJwt, async (req: JwtRequest, res) => {
   const auth0Id = req.auth?.sub
   const { display_name, region_id } = req.body
 
-  await db('users')
-    .where({ auth0_id: auth0Id })
-    .update({ display_name, region_id })
+  if (!auth0Id) {
+    return res.status(401).json({ error: 'Unauthorized' })
+  }
+
+  await db('users').where({ auth0_id: auth0Id }).update({
+    display_name,
+    region_id,
+  })
 
   const updated = await db('users').where({ auth0_id: auth0Id }).first()
 
-  res.json(updated)
+  return res.json(updated)
 })
 
 export default router

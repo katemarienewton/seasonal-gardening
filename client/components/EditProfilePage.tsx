@@ -1,29 +1,35 @@
-import { useState } from 'react'
 import { useNavigate } from 'react-router'
-import { useTestAuth } from '../hooks/useTestAuth'
 import { useUserProfile, useUpdateUserProfile } from '../hooks/useUserProfile'
 
 import ThemedH1 from '../components/theme/ThemedHeader'
 import ThemedText from '../components/theme/ThemedText'
 import Spacer from '../components/theme/Spacer'
+import { useState, useEffect } from 'react'
 
-export default function EditProfile() {
+export default function EditProfilePage() {
   const navigate = useNavigate()
-  const { user } = useTestAuth() // later: useAuth0()
 
-  const userId = 1 // placeholder: replace with user.id linked to DB later once the auth0 is set up
-
-  const profileQuery = useUserProfile(userId)
-  const updateProfile = useUpdateUserProfile(userId)
+  // Load existing profile
+  const profileQuery = useUserProfile()
+  const updateProfile = useUpdateUserProfile()
 
   const [form, setForm] = useState({
-    email: user?.email ?? '',
+    display_name: '',
     region_id: '',
   })
 
-  if (profileQuery.isLoading) return <p>Loading profile...</p>
+  // Populate form once data loads
+  useEffect(() => {
+    if (profileQuery.data) {
+      setForm({
+        display_name: profileQuery.data.display_name ?? '',
+        region_id: profileQuery.data.region_id?.toString() ?? '',
+      })
+    }
+  }, [profileQuery.data])
 
-  const saved = profileQuery.data
+  if (profileQuery.isLoading) return <p>Loading profile...</p>
+  if (profileQuery.isError) return <p>Error loading profile.</p>
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -31,7 +37,12 @@ export default function EditProfile() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    await updateProfile.mutateAsync(form)
+
+    await updateProfile.mutateAsync({
+      display_name: form.display_name,
+      region_id: Number(form.region_id),
+    })
+
     navigate('/profile')
   }
 
@@ -41,19 +52,19 @@ export default function EditProfile() {
       <Spacer className="h-6" />
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-        {/* EMAIL */}
+        {/* DISPLAY NAME */}
         <div>
-          <ThemedText className="mb-1 text-left">Email</ThemedText>
+          <ThemedText className="mb-1 text-left">Display Name</ThemedText>
           <input
-            type="email"
-            name="email"
-            value={form.email}
+            type="text"
+            name="display_name"
+            value={form.display_name}
             className="w-full rounded-xl bg-[#f5f2ed] p-3"
             onChange={handleChange}
           />
         </div>
 
-        {/* REGION */}
+        {/* REGION ID */}
         <div>
           <ThemedText className="mb-1 text-left">Region ID</ThemedText>
           <input
@@ -65,7 +76,7 @@ export default function EditProfile() {
           />
         </div>
 
-        {/* ACTION BUTTONS */}
+        {/* BUTTONS */}
         <button
           type="submit"
           className="rounded-full bg-[#e3ead4] py-3 font-semibold text-[#2f2f2f] hover:bg-[#b9c3a8]"
@@ -75,8 +86,8 @@ export default function EditProfile() {
 
         <button
           type="button"
-          className="rounded-full bg-[#e5e4e3] py-3 font-semibold text-[#2f2f2f] hover:bg-[#dcdcdc]"
           onClick={() => navigate('/profile')}
+          className="rounded-full bg-[#e5e4e3] py-3 font-semibold text-[#2f2f2f] hover:bg-[#d3d0ce]"
         >
           Cancel
         </button>

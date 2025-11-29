@@ -1,17 +1,9 @@
-/**
- * @param { import("knex").Knex } knex
- * @returns { Promise<void> }
- */
-export async function up(knex) {
-  return knex.schema.table('users', (table) => {
-    table.string('email')
-    table.integer('region_id')
-  })
+export function up(knex) {
+  // This migration intentionally left blank because region_id already exists
+  return Promise.resolve()
 }
 
-export async function down(knex) {
-  return knex.schema.table('users', (table) => {
-    table.dropColumn('email')
-    table.dropColumn('region_id')
-  })
+export function down(knex) {
+  // Nothing to rollback
+  return Promise.resolve()
 }
