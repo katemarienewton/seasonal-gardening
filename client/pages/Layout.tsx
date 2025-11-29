@@ -6,11 +6,12 @@ import { useAuth0 } from '@auth0/auth0-react'
 
 export default function Layout() {
   // Local context state for Home filters
+
+  const { isAuthenticated, isLoading: authLoading } = useAuth0()
+  const navigate = useNavigate()
+
   const [selRegionId, setSelRegionId] = useState<string>('')
   const [selMonth, setSelMonth] = useState<string>('')
-
-  const navigate = useNavigate()
-  const { isAuthenticated, isLoading: authLoading } = useAuth0()
 
   // Fetch backend profile ONLY when logged in
   const profileQuery = useUserProfile({
@@ -19,20 +20,18 @@ export default function Layout() {
 
   // Redirect new users once all loading is done
   useEffect(() => {
-    if (authLoading) return // wait for Auth0
-    if (!isAuthenticated) return // not logged in
-    if (profileQuery.isLoading) return // still loading backend profile
-
-    if (profileQuery.data?.isNew === true) {
+    if (!authLoading && isAuthenticated && profileQuery.data?.isNew) {
       navigate('/profile', { replace: true })
     }
-  }, [
-    authLoading,
-    isAuthenticated,
-    profileQuery.isLoading,
-    profileQuery.data,
-    navigate,
-  ])
+  }, [authLoading, isAuthenticated, profileQuery.data?.isNew, navigate])
+
+  if (authLoading) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <p>Loading authentication beep bop beep…</p>
+      </div>
+    )
+  }
 
   return (
     <div className="flex min-h-screen flex-col bg-[#f5f1ed] text-foreground">
