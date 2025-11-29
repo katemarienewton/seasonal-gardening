@@ -14,7 +14,7 @@ export function useUserProfile(options: UseUserProfileOptions = {}) {
     queryKey: ['user-profile'],
     queryFn: async () => {
       const res = await authFetch('/api/v1/users/me')
-      if (!res.ok) throw new Error('Failed to load user')
+      if (!res.ok) throw new Error('Failed to load the user sorry')
       return res.json() as Promise<UserProfile>
     },
     enabled: options.enabled ?? true, // allow caller to disable if needed
@@ -32,7 +32,7 @@ export function useUpdateUserProfile() {
         body: JSON.stringify(updates),
       })
 
-      if (!res.ok) throw new Error('Failed to update user')
+      if (!res.ok) throw new Error('Failed to update user profile sorry')
       return res.json() as Promise<UserProfile>
     },
     onSuccess: () => {

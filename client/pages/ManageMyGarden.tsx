@@ -12,20 +12,25 @@ import Spacer from '../components/theme/Spacer'
 
 export default function ManageMyGarden() {
   const navigate = useNavigate()
-  const { isAuthenticated, loginWithRedirect } = useAuth0()
+  const { isAuthenticated, isLoading, loginWithRedirect } = useAuth0()
 
-  // Hooks must be called unconditionally
+  // Must be called unconditionally
   const gardenQuery = useUserGarden()
   const removeMutation = useRemoveFromGarden()
 
-  // Redirect unauthenticated users *after* hooks run
+  // Wait for Auth0 to finish loading
+  if (isLoading) {
+    return <p>Checking you auth login status…</p>
+  }
+
+  // Redirect if not logged in
   if (!isAuthenticated) {
     loginWithRedirect()
-    return <p>Redirecting to login...</p>
+    return <p>Redirecting to the auth login…</p>
   }
 
   if (gardenQuery.isLoading) return <p>Loading your garden...</p>
-  if (gardenQuery.isError) return <p>Failed to load your garden.</p>
+  if (gardenQuery.isError) return <p>Failed to load your garden sorry.</p>
 
   const plants = gardenQuery.data || []
 
