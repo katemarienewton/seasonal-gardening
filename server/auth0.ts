@@ -4,10 +4,7 @@ import { ParamsDictionary } from 'express-serve-static-core'
 import { JwtPayload } from 'jsonwebtoken'
 import jwks from 'jwks-rsa'
 
-// auth0 recommends  express-oauth2-jwt-bearer over express-jwt for SKA but have done it here.
-
-// TODO: set the domain and audience (API Identifier)
-const domain = 'karengo-2025-ravi.au.auth0.com'
+const domain = 'https://karengo-2025-ravi.au.auth0.com'
 const audience = 'https://seasonalgardening.api'
 
 const checkJwt = jwt({
@@ -17,14 +14,13 @@ const checkJwt = jwt({
     jwksRequestsPerMinute: 5,
     jwksUri: `${domain}/.well-known/jwks.json`,
   }) as GetVerificationKey,
-  audience: audience,
+  audience,
   issuer: `${domain}/`,
   algorithms: ['RS256'],
 })
 
 export default checkJwt
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface JwtRequest<TReq = any, TRes = any>
   extends Request<ParamsDictionary, TRes, TReq> {
   auth?: JwtPayload

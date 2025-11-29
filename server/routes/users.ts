@@ -10,27 +10,23 @@ console.log('users.ts has loaded')
 // - If user exists → return user, isNew: false
 // - If not → create user, return isNew: true
 router.get('/me', checkJwt, async (req: JwtRequest, res) => {
-  try {
-    const auth0Id = req.auth?.sub
-    console.log('HIT GET /users/me')
+  const auth0Id = req.auth?.sub
+  if (!auth0Id) return res.status(401).json({ error: 'Unauthorized' })
 
-    if (!auth0Id) return res.status(401).json({ error: 'Unauthorized' })
+  // look up user by auth0_id (correct)
+  let user = await db('users').where({ auth0_id: auth0Id }).first()
 
-    let user = await db('users').where({ id: auth0Id }).first()
+  // create user if not found
+  if (!user) {
+    user = await db('users')
+      .insert({ auth0_id: auth0Id })
+      .returning('*')
+      .then((rows) => rows[0])
 
-    if (!user) {
-      // Create new user row using Auth0 ID
-      await db('users').insert({ id: auth0Id })
-      user = await db('users').where({ id: auth0Id }).first()
-
-      return res.json({ ...user, isNew: true })
-    }
-
-    return res.json({ ...user, isNew: false })
-  } catch (err) {
-    console.error(err)
-    res.status(500).json({ error: 'Failed to fetch user' })
+    return res.json({ ...user, isNew: true })
   }
+
+  res.json({ ...user, isNew: false })
 })
 
 // PATCH /api/v1/users/me
@@ -56,11 +52,3 @@ router.patch('/me', checkJwt, async (req: JwtRequest, res) => {
 })
 
 export default router
-
-// Potential Refactoring for GET /me
-// Note: Knex's .insert().returning() behavior varies by database (e.g., SQLite may not support it)
-// if (!user) {
-//   const [newUser] = await db('users').insert({ id: auth0Id }).returning('*')
-//   // If returning('*') is not supported, your original two-step method is safer
-//   return res.json({ ...newUser, isNew: true })
-// } this is a recommendation to improve the handling by ensuring the req auth is there before the requet is made.
