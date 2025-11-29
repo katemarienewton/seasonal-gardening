@@ -14,11 +14,19 @@ export default function MyProfile() {
   const profileQuery = useUserProfile()
 
   if (profileQuery.isLoading) {
-    return <p>Loading your profile...</p>
+    return (
+      <main className="flex h-screen items-center justify-center">
+        <p>Loading your profile beep bop…</p>
+      </main>
+    )
   }
 
   if (profileQuery.isError || !profileQuery.data) {
-    return <p>Error loading your profile.</p>
+    return (
+      <main className="flex h-screen items-center justify-center">
+        <p>Failed to load profile sorry.</p>
+      </main>
+    )
   }
 
   const profile = profileQuery.data

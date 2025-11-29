@@ -25,6 +25,7 @@ export default function Layout() {
     }
   }, [authLoading, isAuthenticated, profileQuery.data?.isNew, navigate])
 
+  // Show loading state while Auth0 is initializing to prevent flicker
   if (authLoading) {
     return (
       <div className="flex h-screen items-center justify-center">
