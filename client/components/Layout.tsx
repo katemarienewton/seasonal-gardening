@@ -11,12 +11,12 @@ export default function Layout() {
   const { isAuthenticated, isLoading } = useAuth0()
   const navigate = useNavigate()
 
-  // 👉 Only call useUserProfile *after Auth0 finished loading*
+  // Only call useUserProfile *after Auth0 finished loading*
   const shouldLoadProfile = isAuthenticated && !isLoading
 
-  const profileQuery = useUserProfile(
-    shouldLoadProfile ? {} : { enabled: false },
-  )
+  const profileQuery = useUserProfile({
+    enabled: shouldLoadProfile, // prevents unauthorized calls
+  })
 
   // Redirect new users AFTER profile loads
   useEffect(() => {
@@ -24,6 +24,15 @@ export default function Layout() {
       navigate('/profile', { replace: true })
     }
   }, [shouldLoadProfile, profileQuery.data, navigate])
+
+  // added this in here in case we wanted to link a loading image as sprint exercise
+  if (isLoading) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <p>Loading authentication...</p>
+      </div>
+    )
+  }
 
   return (
     <div className="flex min-h-screen flex-col bg-[#f5f1ed]">
