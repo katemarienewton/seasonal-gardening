@@ -1,30 +1,55 @@
 import express from 'express'
-import db from '../db/connection.ts' 
+import db from '../db/connection.js'
+import checkJwt, { JwtRequest } from '../auth0.js'
 
 const router = express.Router()
 
-// GET user profile
-router.get('/:id', async (req, res) => {
-  const id = req.params.id
-  const user = await db('users').where({ id }).first()
+// GET /api/v1/users/me
+// - Validates JWT
+// - If user exists → return user, isNew: false
+// - If not → create user, return isNew: true
+router.get('/me', checkJwt, async (req: JwtRequest, res) => {
+  try {
+    const auth0Id = req.auth?.sub
+    if (!auth0Id) return res.status(401).json({ error: 'Unauthorized' })
 
-  if (!user) {
-    return res.status(404).json({ error: 'User not found' })
+    let user = await db('users').where({ id: auth0Id }).first()
+
+    if (!user) {
+      // Create new user row using Auth0 ID
+      await db('users').insert({ id: auth0Id })
+      user = await db('users').where({ id: auth0Id }).first()
+
+      return res.json({ ...user, isNew: true })
+    }
+
+    return res.json({ ...user, isNew: false })
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ error: 'Failed to fetch user' })
   }
-
-  res.json(user)
 })
 
-// UPDATE user profile
-router.patch('/:id', async (req, res) => {
-  const id = req.params.id
-  const updates = req.body
+// PATCH /api/v1/users/me
+// Update only backend fields (NOT Auth0)
+router.patch('/me', checkJwt, async (req: JwtRequest, res) => {
+  try {
+    const auth0Id = req.auth?.sub
+    if (!auth0Id) return res.status(401).json({ error: 'Unauthorized' })
 
-  await db('users').where({ id }).update(updates)
+    const { display_name, region_id } = req.body
 
-  const updatedUser = await db('users').where({ id }).first()
+    await db('users').where({ id: auth0Id }).update({
+      display_name,
+      region_id,
+    })
 
-  res.json(updatedUser)
+    const updated = await db('users').where({ id: auth0Id }).first()
+    res.json(updated)
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ error: 'Failed to update user' })
+  }
 })
 
 export default router
