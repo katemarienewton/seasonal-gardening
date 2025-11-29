@@ -53,3 +53,11 @@ router.patch('/me', checkJwt, async (req: JwtRequest, res) => {
 })
 
 export default router
+
+// Potential Refactoring for GET /me
+// Note: Knex's .insert().returning() behavior varies by database (e.g., SQLite may not support it)
+// if (!user) {
+//   const [newUser] = await db('users').insert({ id: auth0Id }).returning('*')
+//   // If returning('*') is not supported, your original two-step method is safer
+//   return res.json({ ...newUser, isNew: true })
+// } this is a recommendation to improve the handling by ensuring the req auth is there before the requet is made.

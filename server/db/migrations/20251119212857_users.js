@@ -1,11 +1,8 @@
-/**
- * @param { import("knex").Knex } knex
- * @returns { Promise<void> }
- */
 export async function up(knex) {
   return knex.schema.createTable('users', (table) => {
-    table.increments('id')
-    table.string('auth0_id')
+    table.string('id').primary() // Auth0 user ID - have removed email as this is sensitive info and verified through auth0
+    table.string('display_name')
+    table.integer('region_id')
   })
 }
 
