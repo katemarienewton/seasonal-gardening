@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from 'react-router'
 import { useAuth0 } from '@auth0/auth0-react'
 
 const navItemClass =
-  'text-base rounded-[40px] px-6 py-3 text-center text-[clamp(14px,3vw,20px)] font-semibold transition-colors duration-300'
+  'hover:text-[#6a8a62] text-base rounded-[40px] px-6 py-3 text-center text-[clamp(14px,3vw,20px)] font-semibold transition-colors duration-300'
 
 export default function Navbar() {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0()

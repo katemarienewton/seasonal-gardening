@@ -23,6 +23,7 @@ export async function getPlantDetail(id: number): Promise<PlantData> {
       'vegetables.image',
       'vegetables.image2',
       'vegetables.image3',
+      'vegetables.image4',
       'soil.id as soilId',
       'soil.type as soilType',
       'soil.preparation as soilPreparation',

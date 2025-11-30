@@ -56,10 +56,29 @@ export default function PlantGuide() {
         You&apos;ve selected to grow {plant.name} in {regionName} in {month}.
       </ThemedH1>
 
-      <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
-        <ThemedText className="mb-10 text-left">
-          Here&apos;s some tips and tricks for this growing season:
-        </ThemedText>
+      <ThemedText className="mb-10 text-left">
+        Here&apos;s some tips and tricks for this growing season:
+      </ThemedText>
+
+      <div
+        className="mb-8 flex gap-4
+      "
+      >
+        <button
+          onClick={() => navigate(-1)}
+          className="gap-4
+      rounded-[40px]
+      bg-[#e8e6e1]
+      px-6
+      py-3
+      text-center
+      text-[clamp(14px,3vw,20px)]
+      font-semibold
+      text-[#2f2f2f]
+      transition hover:bg-[#dcd8ce]"
+        >
+          ← Back to List
+        </button>
 
         <button
           onClick={handleAddToGarden}
@@ -80,13 +99,6 @@ export default function PlantGuide() {
         </button>
       </div>
 
-      <button
-        onClick={() => navigate(-1)}
-        className="rounded-full bg-[#e3ead4] px-8 py-3 text-sm font-semibold text-[#2f2f2f] shadow-md transition hover:bg-[#c8d3b3]"
-      >
-        ← Back to list
-      </button>
-
       <Card className="mb-8 overflow-hidden rounded-lg border-0 bg-[#f5f1ed] shadow-none">
         <CardContent className="grid grid-cols-[1fr_16px_1fr] gap-4 p-0">
           <div className="flex flex-1 flex-col justify-center space-y-6">
@@ -101,7 +113,7 @@ export default function PlantGuide() {
             <FadeImg
               src={plant.image}
               alt={plant.name}
-              className="w-full rounded-lg object-cover"
+              className="w-full rounded-lg object-cover shadow-md"
             />
           </div>
         </CardContent>
@@ -113,7 +125,7 @@ export default function PlantGuide() {
             <FadeImg
               src={plant.image2 || plant.image}
               alt="Growing Conditions"
-              className="w-full rounded-lg object-cover"
+              className="w-full rounded-lg object-cover shadow-md"
             />
           </div>
 
@@ -162,7 +174,7 @@ export default function PlantGuide() {
 
       <Card className="mb-8 overflow-hidden rounded-lg border-0 bg-[#f5f1ed] shadow-none">
         <CardContent className="grid grid-cols-[1fr_16px_1fr] gap-4 p-0">
-          <div className="flex flex-1 flex-col justify-center space-y-6">
+          <div className="flex flex-1 flex-col justify-center space-y-6 py-8">
             <section className="space-y-2">
               <h2 className="text-2xl font-semibold">Staking</h2>
               <p>
@@ -176,10 +188,16 @@ export default function PlantGuide() {
             <section>
               <h2 className="mb-2 text-2xl font-semibold">Harvest</h2>
               <p>
-                <strong>Min days:</strong> {plant.daysToHarvestMin}
+                <strong>Minimum time till harvest:</strong>{' '}
+                {plant.daysToHarvestMin < 365
+                  ? `${plant.daysToHarvestMin} days`
+                  : `${plant.daysToHarvestMin / 365} years`}
               </p>
               <p>
-                <strong>Max days:</strong> {plant.daysToHarvestMax}
+                <strong>Maximum time till harvest:</strong>{' '}
+                {plant.daysToHarvestMax < 365
+                  ? `${plant.daysToHarvestMax} days`
+                  : `${plant.daysToHarvestMax / 365} years`}
               </p>
               <p>
                 <strong>Yield min:</strong> {plant.yieldPerPlantMin} kg
@@ -188,21 +206,28 @@ export default function PlantGuide() {
                 <strong>Yield max:</strong> {plant.yieldPerPlantMax} kg
               </p>
             </section>
-            <section className="space-y-2">
+            <section className="relative z-10 space-y-2">
               <h2 className="text-2xl font-semibold">
                 Calculate the right number of plants for your household.
               </h2>
               <dl className="leading-relaxed">
-                <dd>
+                <dd className="mb-8">
                   Our tool helps estimate how many plants you should grow to
                   meet your household&apos;s yearly needs for this crop.
                 </dd>
               </dl>
-              <div>
+              <section>
                 <div>
                   <button
                     onClick={() => setIsCalculatorOpen(true)}
-                    className="mt-4 rounded-full bg-[#e3ead4] px-8 py-3 text-sm font-semibold text-[#2f2f2f] shadow-md transition hover:bg-[#c8d3b3]"
+                    className="center
+      rounded-[40px]
+      bg-[#d8d9c5]
+      px-6
+      py-3
+      text-center
+      text-[clamp(14px,3vw,20px)]
+      font-semibold transition hover:bg-[#B8C2A1]"
                   >
                     Open Plant Calculator
                   </button>
@@ -221,7 +246,7 @@ export default function PlantGuide() {
                     />
                   )}
                 </div>
-              </div>
+              </section>
             </section>
             {/* <section className="space-y-2">
               <h2 className="text-2xl font-semibold">Storage</h2>
@@ -235,7 +260,7 @@ export default function PlantGuide() {
             <FadeImg
               src={plant.image3 || plant.image}
               alt="Harvest"
-              className="w-full rounded-lg object-cover"
+              className="w-full rounded-lg object-cover shadow-md"
             />
           </div>
         </CardContent>
@@ -245,9 +270,9 @@ export default function PlantGuide() {
         <CardContent className="grid grid-cols-[1fr_16px_1fr] gap-4 p-0">
           <div className="flex flex-shrink-0 md:h-auto md:w-full">
             <FadeImg
-              src={plant.image2 || plant.image}
+              src={plant.image4 || plant.image}
               alt="Growing Conditions"
-              className="w-full rounded-lg object-cover"
+              className="w-full rounded-lg object-cover shadow-md"
             />
           </div>
           <div className="w-full bg-[#f5f1ed]"></div>
