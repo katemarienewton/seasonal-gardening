@@ -264,7 +264,7 @@ export default function PlantGuide() {
         <CardContent className="grid grid-cols-[1fr_16px_1fr] gap-4 p-0">
           <div className="flex flex-shrink-0 md:h-auto md:w-full">
             <FadeImg
-              src={plant.image2 || plant.image}
+              src={plant.image4 || plant.image}
               alt="Growing Conditions"
               className="w-full rounded-lg object-cover shadow-md"
             />

@@ -18,6 +18,7 @@ export interface PlantData {
   image: string
   image2: string
   image3: string
+  image4: string
   soilType: string
   soilPreparation: string
   spacingRowCm: string
