@@ -53,7 +53,7 @@ export default function PlantCalculatorModal({
               min={0}
               value={adults}
               onChange={(e) => setAdults(Number(e.target.value))}
-              className="w-full rounded-lg border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+              className="w-full rounded-lg border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-[#c8d3b3]"
             />
           </div>
 
@@ -69,7 +69,7 @@ export default function PlantCalculatorModal({
               min={0}
               value={children}
               onChange={(e) => setChildren(Number(e.target.value))}
-              className="w-full rounded-lg border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+              className="w-full rounded-lg border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-[#c8d3b3]"
             />
           </div>
         </div>
