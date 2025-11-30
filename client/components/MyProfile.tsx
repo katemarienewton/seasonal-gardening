@@ -75,7 +75,7 @@ export default function MyProfile() {
               Region
             </ThemedText>
             <ThemedH1 className="text-xl text-[#2f2f2f]">
-              {profile.region_id ?? 'Not selected'}
+              {profile.region_name ?? 'Not selected'}
             </ThemedH1>
           </div>
         </div>

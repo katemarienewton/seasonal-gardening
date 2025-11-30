@@ -14,7 +14,7 @@
 /coverage/*
 
 # Dotenv env settings
-.env
+# .env
 
 # Linux scripts
 

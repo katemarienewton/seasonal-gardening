@@ -12,8 +12,18 @@ router.get('/me', checkJwt, async (req: JwtRequest, res) => {
     return res.status(401).json({ error: 'Unauthorized' })
   }
 
-  // Look up by auth0_id (NOT by id)
-  const user = await db('users').where({ auth0_id: auth0Id }).first()
+  // Look up by auth0_id (NOT by id) + added regions name as well
+  const user = await db('users')
+    .leftJoin('region', 'users.region_id', 'region.id')
+    .select(
+      'users.id',
+      'users.auth0_id',
+      'users.display_name',
+      'users.region_id',
+      'region.name as region_name',
+    )
+    .where('users.auth0_id', auth0Id)
+    .first()
 
   // If user doesn't exist → create it
   if (!user) {
@@ -27,6 +37,7 @@ router.get('/me', checkJwt, async (req: JwtRequest, res) => {
 
     return res.json({
       ...created[0],
+      region_name: null,
       isNew: true,
     })
   }
