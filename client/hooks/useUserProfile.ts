@@ -1,31 +1,42 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useAuthFetch } from '../components/lib/authFetch'
 
-export function useUserProfile(id: number | string) {
-  return useQuery({
-    queryKey: ['user', id],
+import { UserProfile, UserProfileUpdate } from '../../models/user'
+
+interface UseUserProfileOptions {
+  enabled?: boolean
+}
+
+export function useUserProfile(options: UseUserProfileOptions = {}) {
+  const authFetch = useAuthFetch()
+
+  return useQuery<UserProfile>({
+    queryKey: ['user-profile'],
     queryFn: async () => {
-      const res = await fetch(`/api/v1/users/${id}`)
-      if (!res.ok) throw new Error('Failed to load user')
-      return res.json()
+      const res = await authFetch('/api/v1/users/me')
+      if (!res.ok) throw new Error('Failed to load the user sorry')
+      return res.json() as Promise<UserProfile>
     },
+    enabled: options.enabled ?? true, // allow caller to disable if needed
   })
 }
 
-export function useUpdateUserProfile(id: number | string) {
+export function useUpdateUserProfile() {
+  const authFetch = useAuthFetch()
   const queryClient = useQueryClient()
 
-  return useMutation({
-    mutationFn: async (updates: any) => {
-      const res = await fetch(`/api/v1/users/${id}`, {
+  return useMutation<UserProfile, Error, UserProfileUpdate>({
+    mutationFn: async (updates) => {
+      const res = await authFetch('/api/v1/users/me', {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updates),
       })
-      if (!res.ok) throw new Error('Failed to update user')
-      return res.json()
+
+      if (!res.ok) throw new Error('Failed to update user profile sorry')
+      return res.json() as Promise<UserProfile>
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['user', id] })
+      queryClient.invalidateQueries({ queryKey: ['user-profile'] })
     },
   })
 }

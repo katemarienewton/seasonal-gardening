@@ -1,39 +1,64 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
-import { useTestAuth } from '../hooks/useTestAuth'
 import { useUserProfile, useUpdateUserProfile } from '../hooks/useUserProfile'
+import { useAuth0 } from '@auth0/auth0-react'
 
 import ThemedH1 from '../components/theme/ThemedHeader'
 import ThemedText from '../components/theme/ThemedText'
 import Spacer from '../components/theme/Spacer'
 
-export default function EditProfile() {
+export default function EditProfilePage() {
   const navigate = useNavigate()
-  const { user } = useTestAuth() // later: useAuth0()
+  const { user: authUser } = useAuth0()
 
-  const userId = 1 // placeholder: replace with user.id linked to DB later once the auth0 is set up
+  const profileQuery = useUserProfile()
+  const updateProfile = useUpdateUserProfile()
 
-  const profileQuery = useUserProfile(userId)
-  const updateProfile = useUpdateUserProfile(userId)
-
+  const [regions, setRegions] = useState<{ id: number; name: string }[]>([])
   const [form, setForm] = useState({
-    email: user?.email ?? '',
+    display_name: '',
     region_id: '',
   })
 
-  if (profileQuery.isLoading) return <p>Loading profile...</p>
+  // Load existing profile values into form
+  useEffect(() => {
+    if (profileQuery.data) {
+      setForm({
+        display_name: profileQuery.data.display_name ?? '',
+        region_id: profileQuery.data.region_id?.toString() ?? '',
+      })
+    }
+  }, [profileQuery.data])
 
-  const saved = profileQuery.data
+  // Fetch region list for the dropdown
+  useEffect(() => {
+    async function loadRegions() {
+      const res = await fetch('/api/v1/regions')
+      const data = await res.json()
+      setRegions(data)
+    }
+    loadRegions()
+  }, [])
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    await updateProfile.mutateAsync(form)
+
+    await updateProfile.mutateAsync({
+      display_name: form.display_name,
+      region_id: Number(form.region_id),
+    })
+
     navigate('/profile')
   }
+
+  if (profileQuery.isLoading) return <p>Loading...</p>
+  if (!profileQuery.data) return <p>Failed to load profile.</p>
 
   return (
     <main className="mx-auto max-w-xl px-6 py-10">
@@ -41,31 +66,37 @@ export default function EditProfile() {
       <Spacer className="h-6" />
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-        {/* EMAIL */}
+        {/* Display Name */}
         <div>
-          <ThemedText className="mb-1 text-left">Email</ThemedText>
+          <ThemedText className="mb-1 text-left">Display Name</ThemedText>
           <input
-            type="email"
-            name="email"
-            value={form.email}
+            type="text"
+            name="display_name"
+            value={form.display_name}
             className="w-full rounded-xl bg-[#f5f2ed] p-3"
             onChange={handleChange}
           />
         </div>
 
-        {/* REGION */}
+        {/* Region Dropdown */}
         <div>
-          <ThemedText className="mb-1 text-left">Region ID</ThemedText>
-          <input
-            type="number"
+          <ThemedText className="mb-1 text-left">Region</ThemedText>
+          <select
             name="region_id"
             value={form.region_id}
-            className="w-full rounded-xl bg-[#f5f2ed] p-3"
             onChange={handleChange}
-          />
+            className="w-full rounded-xl bg-[#f5f2ed] p-3"
+          >
+            <option value="">Select region...</option>
+            {regions.map((r) => (
+              <option key={r.id} value={r.id}>
+                {r.name}
+              </option>
+            ))}
+          </select>
         </div>
 
-        {/* ACTION BUTTONS */}
+        {/* Save Button */}
         <button
           type="submit"
           className="rounded-full bg-[#e3ead4] py-3 font-semibold text-[#2f2f2f] hover:bg-[#b9c3a8]"
@@ -73,6 +104,7 @@ export default function EditProfile() {
           Save Changes
         </button>
 
+        {/* Cancel */}
         <button
           type="button"
           className="rounded-full bg-[#e5e4e3] py-3 font-semibold text-[#2f2f2f] hover:bg-[#dcdcdc]"

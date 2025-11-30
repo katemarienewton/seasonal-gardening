@@ -1,6 +1,12 @@
 import { useNavigate } from 'react-router'
-import { useTestAuth } from '../hooks/useTestAuth'
-import { useUserGarden } from '../hooks/useUserGarden'
+import { useAuth0 } from '@auth0/auth0-react'
+import {
+  useUserGarden,
+  useRemoveFromGarden,
+  GardenPlant,
+} from '../hooks/useUserGarden'
+
+import Spacer from '../components/theme/Spacer'
 import { Link } from 'react-router-dom'
 
 import ThemedH1 from '../components/theme/ThemedHeader'
@@ -9,16 +15,27 @@ import FadeImg from '../components/theme/FadeImg'
 
 export default function ManageMyGarden() {
   const navigate = useNavigate()
-  const { user } = useTestAuth() // should be creating error as we are not using the user - will change once we are linkong auth0
+  const { isAuthenticated, isLoading, loginWithRedirect } = useAuth0()
 
-  const userId = 1 // TEMP during FakeAuth Mode — replace with user.id when we are ready to roll out the full program
+  // Must be called unconditionally
+  const gardenQuery = useUserGarden()
+  const removeMutation = useRemoveFromGarden()
 
-  const gardenQuery = useUserGarden(userId)
+  // Wait for Auth0 to finish loading
+  if (isLoading) {
+    return <p>Checking you auth login status…</p>
+  }
 
-  if (gardenQuery.isLoading) return <p>Loading your plants in your stash...</p>
-  if (gardenQuery.isError) return <p>Error loading your personal garden.</p>
+  // Redirect if not logged in
+  if (!isAuthenticated) {
+    loginWithRedirect()
+    return <p>Redirecting to the auth login…</p>
+  }
 
-  const plants = gardenQuery.data
+  if (gardenQuery.isLoading) return <p>Loading your garden...</p>
+  if (gardenQuery.isError) return <p>Failed to load your garden sorry.</p>
+
+  const plants = gardenQuery.data || []
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-12">
