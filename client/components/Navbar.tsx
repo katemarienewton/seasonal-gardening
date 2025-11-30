@@ -24,7 +24,7 @@ export default function Navbar() {
 
   return (
     <nav>
-      <div className="flex gap-1 rounded-full bg-[#e8e6e1] px-2 py-0.5">
+      <div className="flex items-center gap-1 rounded-full bg-[#e8e6e1] px-2 py-0.5">
         <NavLink
           to="/"
           className={({ isActive }) =>
