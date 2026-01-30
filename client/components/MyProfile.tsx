@@ -40,11 +40,11 @@ export default function MyProfile() {
       </ThemedText>
 
       {/* PROFILE CARD */}
-      <section className="rounded-2xl bg-[#f5f2ed] p-8 shadow-md">
+      <section className="rounded-2xl bg-white p-8 shadow-md">
         {/* TOP SECTION (Auth0 avatar + name) */}
         <div className="mb-8 flex items-center gap-6">
           <img
-            src={authUser?.picture}
+            src={authUser?.picture ?? '/assets/plant.png'}
             alt="User avatar"
             className="h-20 w-20 rounded-full shadow"
           />
@@ -80,7 +80,7 @@ export default function MyProfile() {
           </div>
         </div>
 
-        <Spacer className="h-8" />
+        <div className="py-3" />
 
         {/* ACTION BUTTONS */}
         <div className="flex flex-col gap-4">

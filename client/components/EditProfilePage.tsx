@@ -73,7 +73,7 @@ export default function EditProfilePage() {
             type="text"
             name="display_name"
             value={form.display_name}
-            className="w-full rounded-xl bg-[#f5f2ed] p-3"
+            className="h-12 w-full rounded-xl bg-white px-4"
             onChange={handleChange}
           />
         </div>
@@ -85,7 +85,7 @@ export default function EditProfilePage() {
             name="region_id"
             value={form.region_id}
             onChange={handleChange}
-            className="w-full rounded-xl bg-[#f5f2ed] p-3"
+            className="h-12 w-full appearance-none rounded-xl bg-white px-4"
           >
             <option value="">Select region...</option>
             {regions.map((r) => (
